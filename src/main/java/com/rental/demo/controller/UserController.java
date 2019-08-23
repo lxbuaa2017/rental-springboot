@@ -14,7 +14,7 @@ public class UserController {
     private UserService userService;
     @GetMapping("/1")
     public String test(){
-        User user=new User(new Long(1007),"luoxian","176110abc","17611030267","1753312844@qq.com",true,19);
+        User user=new User("luoxian","176110abc","17611030267","1753312844@qq.com",true,19);
         return userService.save(user).toString();
     }
 }

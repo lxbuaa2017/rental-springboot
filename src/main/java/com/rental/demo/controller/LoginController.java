@@ -12,16 +12,20 @@ import java.util.Map;
 public class LoginController {
     @Autowired
     private UserService userService;
+
     @CrossOrigin
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
-    public int login(@RequestBody Map<String,Object> map){
-        if(map==null)
+    public int login(@RequestBody Map<String, Object> map) {
+        if (map == null)
             return 0;
         else {
-            User user=userService.findByName(map.get("username").toString());
-            String input_pwd=map.get("password").toString();
-            if(input_pwd.equals(user.getPassword()))
+            User user = userService.findByName(map.get("username").toString());
+            if (user == null) {
+                return 0;
+            }
+            String input_pwd = map.get("password").toString();
+            if (input_pwd.equals(user.getPassword()))
                 return 1;
             else
                 return 0;

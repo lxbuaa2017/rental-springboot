@@ -1,5 +1,4 @@
 package com.rental.demo.service.TenantService;
-
 import com.rental.demo.entity.Tenant;
 
 

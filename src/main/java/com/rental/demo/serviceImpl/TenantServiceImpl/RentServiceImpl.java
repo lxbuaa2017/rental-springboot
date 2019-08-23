@@ -15,10 +15,10 @@ public class RentServiceImpl implements RentService {
     @Override
     public int shortRentalEnroll(ShortRentOrder shortRentOrder) {
         if(shortRentOrder.getRoom()==null)
-            return Constant.FAIL;
+            return Constant.ERROR;
        synchronized (shortRentOrder.getRoom()){//防止多次点击出现并发
            if(shortRentOrder.getRoom().getState()!= Constant.FREE){
-               return Constant.FAIL;
+               return Constant.ERROR;
            }
            else {
                shortRentOrder.getRoom().setState(Constant.RENTED);//把房间置为出租状态

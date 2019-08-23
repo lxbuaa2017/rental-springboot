@@ -3,7 +3,7 @@ package com.rental.demo.util;
 public class Constant {
     //操作成功
     public static final int SUCCESS =1000;
-    public static final int FAIL =9999;
+    public static final int ERROR =9999;
 
     //注册登录
     public static final int USER_AREADY_EXIST =1028;

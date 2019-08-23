@@ -1,13 +1,12 @@
 package com.rental.demo.service;
 
-import com.rental.demo.entity.User;
-import org.springframework.stereotype.Service;
+import com.rental.demo.entity.Tenant;
 
 import java.util.List;
 
 public interface UserService {
-    public User findOne(Long id);
-    public User findByName(String name);
-    public User save(User user);
-    public List<User> queryAll();
+    public Tenant findOne(Long id);
+    public Tenant findByName(String name);
+    public Tenant save(Tenant tenant);
+    public List<Tenant> queryAll();
 }

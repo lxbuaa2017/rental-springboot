@@ -1,11 +1,9 @@
 package com.rental.demo.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.fasterxml.jackson.databind.deser.std.JsonNodeDeserializer;
-import com.rental.demo.entity.User;
-import com.rental.demo.service.RegisterService;
+import com.rental.demo.entity.Tenant;
+import com.rental.demo.service.TenantService.TenantRegisterService;
 import com.rental.demo.service.UserService;
-import jdk.nashorn.internal.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,13 +15,13 @@ public class RegisterController {
     @Autowired
     private UserService userService;
     @Autowired
-    private RegisterService registerService;
+    private TenantRegisterService tenantRegisterService;
     @CrossOrigin
     @RequestMapping(value = "/register",method = RequestMethod.POST)
     @ResponseBody
     public int register(@RequestBody Map<String,Object> map){
         String jsonString= JSON.toJSONString(map);
-        User user= JSON.parseObject(jsonString,User.class);
-        return registerService.register(user);
+        Tenant tenant = JSON.parseObject(jsonString, Tenant.class);
+        return tenantRegisterService.register(tenant);
     }
 }

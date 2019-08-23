@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Document(collection = "short_rent_order")
 public class ShortRentOrder implements Serializable {
     @Id
-    private Long id;
+    private String id;
     private String checkInDay;//中午十二点后可以入住
     private String leaveDay;//早上十二点之前必须离开
     private Tenant tenant;

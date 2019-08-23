@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @ToString
 public class Room {
     @Id
-    private Long roomId;
+    private String roomId;
     private String type;
     private LandLord landLord;
     private Tenant renter;

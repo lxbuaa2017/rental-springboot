@@ -13,20 +13,20 @@ import javax.servlet.http.HttpSession;
 public class SendSmsServiceController {
     @Autowired
     private SendSmsService sendSmsService;
-    @CrossOrigin
-    @RequestMapping(value = "/sendSms",method = RequestMethod.POST)
+
+    @CrossOrigin(origins = "http://localhost:8080", allowCredentials = "true")
+    @RequestMapping(value = "/sendSms", method = RequestMethod.POST)
     @ResponseBody
-    public boolean sendSms(@RequestParam("phone")String phone,HttpSession httpSession
-                          ){
-        String code=sendSmsService.sendVerificationCode(phone);
-        if(code.equals("发送失败"))
+    public boolean sendSms(@RequestBody JSONObject jsonObject, HttpSession httpSession) {
+        String code = sendSmsService.sendVerificationCode(jsonObject.getString("phone"));
+        if (code.equals("发送失败"))
             return false;
-        else{
-            JSONObject jsonObject=new JSONObject();
-            jsonObject.put("phone",phone);
-            jsonObject.put("code",code);
-            jsonObject.put("createTime",System.currentTimeMillis());
-            httpSession.setAttribute("codeResult",jsonObject);
+        else {
+            JSONObject res = new JSONObject();
+            res.put("phone", jsonObject.getString("phone"));
+            res.put("code", code);
+            res.put("createTime", System.currentTimeMillis());
+            httpSession.setAttribute("codeResult", res);
             return true;
         }
     }

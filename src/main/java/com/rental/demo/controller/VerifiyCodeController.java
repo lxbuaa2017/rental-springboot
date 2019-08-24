@@ -1,5 +1,6 @@
 package com.rental.demo.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.rental.demo.util.JsonResult;
 import org.springframework.web.bind.annotation.*;
@@ -12,20 +13,19 @@ import static com.rental.demo.util.Constant.SUCCESS;
 @RestController
 @RequestMapping("/")
 public class VerifiyCodeController {
-    @CrossOrigin
-    @RequestMapping(value = "/verify",method = RequestMethod.POST)
+    @CrossOrigin(origins = "http://localhost:8080", allowCredentials = "true")
+    @RequestMapping(value = "/verify", method = RequestMethod.POST)
     @ResponseBody
-    public String verify(@RequestParam("code")String code,
-                          HttpSession httpSession){
-        if(httpSession.getAttribute("codeResult")==null){
-            return JsonResult.build(ERROR,"未发送验证码",null);
-        }
-        else {
-            JSONObject jsonObject=(JSONObject) httpSession.getAttribute("codeResult");
-            if(!jsonObject.get("code").equals(code))
-                return JsonResult.build(ERROR,"验证码不符",null);
+    public int verify(@RequestBody JSONObject jsonObject,
+                         HttpSession httpSession) {
+        if (httpSession.getAttribute("codeResult") == null) {
+            return ERROR;
+        } else {
+            JSONObject res = (JSONObject) httpSession.getAttribute("codeResult");
+            if (!res.get("code").equals(jsonObject.get("code")))
+                return ERROR;
             else
-                return JsonResult.build(SUCCESS,"验证码通过",null);
+                return SUCCESS;
         }
     }
 }

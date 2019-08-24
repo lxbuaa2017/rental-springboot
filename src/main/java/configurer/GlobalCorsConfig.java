@@ -19,7 +19,8 @@ public class GlobalCorsConfig {
                 registry.addMapping("/**")
                         .allowedHeaders("*")
                         .allowedMethods("*")
-                        .allowedOrigins("*");
+                        .allowCredentials(true)
+                        .allowedOrigins("http://localhost:8080");
             }
         };
     }

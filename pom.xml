@@ -62,6 +62,27 @@
             <artifactId>zhenzisms</artifactId>
             <version>1.0.2</version>
         </dependency>
+        <!--pdf start-->
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>itextpdf</artifactId>
+            <version>5.5.10</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.itextpdf/font-asian -->
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>font-asian</artifactId>
+            <version>7.1.2</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>itext-asian</artifactId>
+            <version>5.2.0</version>
+        </dependency>
+        <!--pdf end-->
     </dependencies>
 
     <build>

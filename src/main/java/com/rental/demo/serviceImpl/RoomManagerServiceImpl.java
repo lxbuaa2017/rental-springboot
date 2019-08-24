@@ -1,9 +1,9 @@
-package com.rental.demo.serviceImpl.LandLordServiceImpl;
+package com.rental.demo.serviceImpl;
 
 import com.rental.demo.entity.LandLord;
 import com.rental.demo.entity.Room;
 import com.rental.demo.repository.RoomRepository;
-import com.rental.demo.service.LandLordService.RoomManagerService;
+import com.rental.demo.service.RoomManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

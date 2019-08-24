@@ -1,4 +1,4 @@
-package com.rental.demo.service.LandLordService;
+package com.rental.demo.service;
 
 import com.rental.demo.entity.LandLord;
 import com.rental.demo.entity.Room;

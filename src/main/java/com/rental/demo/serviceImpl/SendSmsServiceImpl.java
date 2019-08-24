@@ -11,7 +11,7 @@ import java.util.Random;
 public class SendSmsServiceImpl implements SendSmsService {
     @Override
     public String sendVerificationCode(String phone) {
-        String verificationCode=String.valueOf(new Random().nextInt(999999));
+        String verificationCode=String.format("%06d", new Random().nextInt(999999));
         ZhenziSmsClient client = new ZhenziSmsClient("https://sms_developer.zhenzikj.com",
                 "102458", "f9ab7d85-bea0-48ef-875b-6895f4838061");
         try {

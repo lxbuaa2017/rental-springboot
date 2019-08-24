@@ -10,14 +10,13 @@ import java.time.LocalDateTime;
 
 @Data
 @Document(collection = "room")
-@AllArgsConstructor
 @ToString
 public class Room {
     @Id
     private String roomId;
     private String type;
     private String address;
-    private double area;//单位㎡
+    private String area;//单位㎡
     private LandLord landLord;
     private Tenant renter;
     private LocalDateTime rentTime;

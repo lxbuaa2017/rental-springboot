@@ -7,16 +7,16 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
-@Document(collection = "tenant")
+@Document(collection = "maintenanceman")
 @AllArgsConstructor
 @ToString
-public class Tenant {
+public class Maintenanceman {
     @Id
     private String username;
     private String password;
     private String phone;
-    private String email;
-    private boolean isMale;
+    private String realname;
     private int age;
-
+    private boolean isMale;
+    private int status;
 }

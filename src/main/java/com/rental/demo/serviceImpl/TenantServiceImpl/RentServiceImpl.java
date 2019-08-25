@@ -1,7 +1,9 @@
 package com.rental.demo.serviceImpl.TenantServiceImpl;
 
+import com.rental.demo.entity.LongRentOrder;
 import com.rental.demo.entity.ShortRentOrder;
 import com.rental.demo.entity.Tenant;
+import com.rental.demo.repository.LongRentOrderRepository;
 import com.rental.demo.repository.ShortRentOrderRepository;
 import com.rental.demo.service.TenantService.RentService;
 import com.rental.demo.util.Constant;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 public class RentServiceImpl implements RentService {
     @Autowired
     private ShortRentOrderRepository shortRentOrderRepository;
+    private LongRentOrderRepository longRentOrderRepository;
     @Override
     public int shortRentalEnroll(ShortRentOrder shortRentOrder) {
         if(shortRentOrder.getRoom()==null)
@@ -30,7 +33,19 @@ public class RentServiceImpl implements RentService {
     }
 
     @Override
-    public int longRental(Tenant tenant, String roomId) {
-        return 0;
+    public int longRental(LongRentOrder longRentOrder) {
+        if (longRentOrder.getRoom()==null)
+            return Constant.ERROR;
+        synchronized (longRentOrder.getRoom()){
+            if (longRentOrder.getRoom().getState()!=Constant.FREE){
+                return Constant.ERROR;
+            }
+            else{
+                longRentOrder.getRoom().setState(Constant.RENTED);
+                longRentOrder.setState(Constant.WAIT_CONFIRM);
+                longRentOrderRepository.save(longRentOrder);
+                return Constant.SUCCESS;
+            }
+        }
     }
 }

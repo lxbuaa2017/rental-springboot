@@ -11,15 +11,15 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/")
-public class RentController {
+public class LongRentController {
     @Autowired
     private RentService rentService;
     @CrossOrigin
-    @RequestMapping(value = "/shortRentEnroll",method= RequestMethod.POST)
+    @RequestMapping(value = "/longRentEnroll",method= RequestMethod.POST)
     @ResponseBody
-    public int shortRentEnroll(@RequestBody Map<String,Object> map){
-        String jsonString= JSON.toJSONString(map);
-        ShortRentOrder shortRentOrder=JSON.parseObject(jsonString,ShortRentOrder.class);
-        return rentService.shortRentalEnroll(shortRentOrder);
+    public int longRentEnroll(@RequestBody Map<String,Object> map) {
+        String jsonString = JSON.toJSONString(map);
+        LongRentOrder longRentOrder = JSON.parseObject(jsonString, LongRentOrder.class);
+        return rentService.longRental(longRentOrder);
     }
 }

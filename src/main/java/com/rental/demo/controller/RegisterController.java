@@ -19,7 +19,7 @@ public class RegisterController {
     @CrossOrigin
     @RequestMapping(value = "/register",method = RequestMethod.POST)
     @ResponseBody
-    public int register(@RequestBody Map<String,Object> map){
+    public int register(@RequestParam Map<String,Object> map){
         String jsonString= JSON.toJSONString(map);
         Tenant tenant = JSON.parseObject(jsonString, Tenant.class);
         return tenantRegisterService.register(tenant);

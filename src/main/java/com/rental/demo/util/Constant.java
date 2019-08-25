@@ -6,7 +6,7 @@ public class Constant {
     public static final int ERROR =9999;
 
     //注册登录
-    public static final int USER_AREADY_EXIST =1028;
+    public static final int USER_ALREADY_EXIST =1028;
 
     //订单
     public static final int WAIT_CONFIRM =1823;//待审核
@@ -16,4 +16,11 @@ public class Constant {
     //房间状态
     public static final int RENTED =2001;
     public static final int FREE =2002;
+
+    //师傅
+    public static final int MTM_ALREADY_EXIST = 3001;
+    public static final int MTM_NOT_EXIST = 3002;
+
+    //投诉
+    public static final int COM_NOT_EXIST = 4002;
 }

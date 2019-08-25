@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.rental.demo.util.Constant.ROOM_AREADY_EXIST;
@@ -39,6 +40,20 @@ public class RoomManagerController {
     public List<Room> getRoom(HttpSession httpSession){
         return roomRepository.findAll();
     }
+
+    @CrossOrigin(origins = "http://localhost:8080", allowCredentials = "true")
+    @RequestMapping(value = "/findByRentType",method = RequestMethod.POST)
+    @ResponseBody
+    public List<Room> getRoomByRentType(@RequestBody JSONObject jsonObject, HttpSession httpSession){
+        int rentType=jsonObject.getIntValue("rentType");
+        List<Room> rooms=new ArrayList<>();
+        List<Room> rooms1= roomRepository.findByRentType(rentType);
+        List<Room> rooms2= roomRepository.findByRentType(2006);
+        rooms.addAll(rooms1);
+        rooms.addAll(rooms2);
+        return rooms;
+    }
+
     @CrossOrigin(origins = "http://localhost:8080", allowCredentials = "true")
     @RequestMapping(value = "/findByAddress",method = RequestMethod.GET)
     @ResponseBody

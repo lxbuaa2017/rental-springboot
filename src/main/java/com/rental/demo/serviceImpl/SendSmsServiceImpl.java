@@ -33,13 +33,13 @@ public class SendSmsServiceImpl implements SendSmsService {
     }
 
     @Override
-    public boolean sendReminderSms(LongRentOrder longRentOrder) {      //每天固定时间运行一次,如果是23号,发送短信
+    public String sendReminderSms(LongRentOrder longRentOrder) {      //每天固定时间运行一次,如果是23号,发送短信
         String phone=longRentOrder.getTenant().getPhone();
         Calendar time=Calendar.getInstance();   //获取当前时间
         int day=time.get(Calendar.DAY_OF_MONTH);    //获取当前日期
         if(day!=23){
             longRentOrder.setReminded(false);
-            return false;
+            return "不在预订的发送时间,发送失败";
         }
         else if(day==23&&!longRentOrder.isReminded()){  //如果23号没有提醒过
             ZhenziSmsClient client = new ZhenziSmsClient("https://sms_developer.zhenzikj.com",
@@ -48,18 +48,17 @@ public class SendSmsServiceImpl implements SendSmsService {
                 String result = client.send(phone, "现在距离月底还有一周,请及时提交长租租金,若您已提交,请忽视本条信息.       --青年租房网" );
                 JSONObject json = JSONObject.parseObject(result);
                 if (json.getIntValue("code")!=0) {//发送短信失败
-                    //System.out.println(json.get("data"));
-                    return false;
+                    return "发送失败";
                 }
                 else {
                     longRentOrder.setReminded(true);
-                    return true;
+                    return null;
                 }
             }
             catch (Exception e){
                 e.printStackTrace();
             }
         }
-        return false;
+        return null;
     }
 }

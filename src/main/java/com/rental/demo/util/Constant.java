@@ -17,4 +17,7 @@ public class Constant {
     public static final int RENTED =2001;
     public static final int FREE =2002;
     public static final int ROOM_AREADY_EXIST =2003;
+    public static final int LONGRENT=2004;//只能长租
+    public static final int SHORTRENT=2005;//只能短租
+    public static final int BOTHRENT=2006;//长租短租都可以
 }

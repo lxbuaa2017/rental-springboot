@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
-@Document(collection = "img_file")
+@Document(collection = "pdf_file")
 @ToString
 public class PdfFile {
     @Id

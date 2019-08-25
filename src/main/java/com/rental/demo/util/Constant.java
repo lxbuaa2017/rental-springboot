@@ -16,4 +16,5 @@ public class Constant {
     //房间状态
     public static final int RENTED =2001;
     public static final int FREE =2002;
+    public static final int ROOM_AREADY_EXIST =2003;
 }

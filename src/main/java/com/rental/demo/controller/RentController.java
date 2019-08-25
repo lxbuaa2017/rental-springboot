@@ -16,9 +16,9 @@ public class RentController {
     @CrossOrigin
     @RequestMapping(value = "/shortRentEnroll",method= RequestMethod.POST)
     @ResponseBody
-    public int shortRentEnroll(@RequestBody Map<String,Object> map){
-        String jsonString= JSON.toJSONString(map);
-        ShortRentOrder shortRentOrder=JSON.parseObject(jsonString,ShortRentOrder.class);
+    public int shortRentEnroll(@RequestBody ShortRentOrder shortRentOrder){
+//        String jsonString= JSON.toJSONString(map); Map<String,Object> map
+//        ShortRentOrder shortRentOrder=JSON.parseObject(jsonString,ShortRentOrder.class);
         return rentService.shortRentalEnroll(shortRentOrder);
     }
 }

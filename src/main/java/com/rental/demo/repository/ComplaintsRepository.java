@@ -3,5 +3,8 @@ package com.rental.demo.repository;
 import com.rental.demo.entity.Complaints;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface ComplaintsRepository extends MongoRepository<Complaints,Long> {
+import java.util.List;
+
+public interface ComplaintsRepository extends MongoRepository<Complaints,String> {
+    List<Complaints> findByTenantUsername(String name);
 }

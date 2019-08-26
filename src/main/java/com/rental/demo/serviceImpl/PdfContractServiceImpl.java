@@ -42,10 +42,11 @@ public class PdfContractServiceImpl implements PdfContractService {
             form.setField("toYear",Integer.toString(pdfFile.getDueDay().getYear()));
             form.setField("toMonth",Integer.toString(pdfFile.getDueDay().getMonthValue()));
             form.setField("toDay",Integer.toString(pdfFile.getDueDay().getDayOfMonth()));
+            String str=pdfFile.getTenantName()+"租房合同";
+            form.setListOption(str,null,null);//这句没测试过，出bug的话删这句
             stamper.setFormFlattening(true);
             stamper.close();
             pdfFile.setContent(new Binary(bos.toByteArray()));
-            String str=pdfFile.getTenantName()+"租房合同";
             pdfFile.setName(str);
             pdfFile.setCreatedTime(LocalDateTime.now());
             PdfFile savePdf=pdfFileRepository.save(pdfFile);

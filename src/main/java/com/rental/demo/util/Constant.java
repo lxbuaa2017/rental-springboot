@@ -17,10 +17,17 @@ public class Constant {
     public static final int RENTED =2001;
     public static final int FREE =2002;
 
+
     //师傅
     public static final int MTM_ALREADY_EXIST = 3001;
     public static final int MTM_NOT_EXIST = 3002;
 
     //投诉
     public static final int COM_NOT_EXIST = 4002;
+    public static final int USER_HAS_NO_COM = 4001;
+    //房间
+    public static final int ROOM_AREADY_EXIST =2003;
+
+    //评价
+    public static final int EVA_NOT_EXIST = 5001;
 }

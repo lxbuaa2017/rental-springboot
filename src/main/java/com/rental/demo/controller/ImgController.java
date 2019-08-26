@@ -16,8 +16,8 @@ public class ImgController {
     @Autowired
     private ImgFileRepository imgFileRepository;
     @PostMapping("/file/uploadImage")
-    public String uploadImg(@RequestParam(value = "image") MultipartFile file) {
-        return uploadImgService.uploadImg(file);
+    public String uploadImg(@RequestParam(value = "image") MultipartFile file,@RequestParam(value = "address") String address) {
+        return uploadImgService.uploadImg(file,address);
     }
     @GetMapping(value = "/file/image/{id}",produces = {MediaType.IMAGE_JPEG_VALUE,MediaType.IMAGE_PNG_VALUE})
     @ResponseBody

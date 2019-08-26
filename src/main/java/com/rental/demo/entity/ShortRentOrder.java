@@ -15,7 +15,8 @@ public class ShortRentOrder implements Serializable {
     private String id;
     private String checkInDay;//中午十二点后可以入住
     private String leaveDay;//早上十二点之前必须离开
-    private Tenant tenant;
+    private String tenantName;
+    private String tenantId;
     private int state;
     private Room room;
 }

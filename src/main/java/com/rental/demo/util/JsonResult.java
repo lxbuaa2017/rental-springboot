@@ -23,7 +23,8 @@ public class JsonResult<T> implements Serializable {
         state = SUCCESS;
         message = MESSAGE;
     }
-    public JsonResult (T data){
+
+    public JsonResult(T data) {
         state = SUCCESS;
         this.data = data;
     }
@@ -33,39 +34,48 @@ public class JsonResult<T> implements Serializable {
         this.message = message;
         this.data = data;
     }
-    public static String build(int state, String message, Object data){
-        JsonResult jsonResult=new JsonResult(state,message,data);
+
+    public static String build(int state, String message, Object data) {
+        JsonResult jsonResult = new JsonResult(state, message, data);
         jsonResult.state = state;
         jsonResult.message = message;
         jsonResult.data = data;
         return jsonResult.toString();
     }
-    public JsonResult (Throwable e){
+
+    public JsonResult(Throwable e) {
         state = ERROR;
         this.message = e.getMessage();
     }
+
     //get AND set 方法
     public int getState() {
         return state;
     }
+
     public void setState(int state) {
         this.state = state;
     }
+
     public String getMessage() {
         return message;
     }
+
     public void setMessage(String message) {
         this.message = message;
     }
+
     public T getData() {
         return data;
     }
+
     public void setData(T data) {
         this.data = data;
     }
+
     @Override
     public String toString() {
-        return "JsonResult [state=" + state + ", message=" + message + ", data=" + data + "]";
+        return "{state=" + state + ", message=" + message + ", data=" + data + "}";
     }
 }
 

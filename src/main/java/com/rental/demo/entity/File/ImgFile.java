@@ -21,4 +21,8 @@ public class ImgFile {
     private Binary content;
     private String contentType;
     private long size;
+
+    public Binary getContent() {
+        return content;
+    }
 }

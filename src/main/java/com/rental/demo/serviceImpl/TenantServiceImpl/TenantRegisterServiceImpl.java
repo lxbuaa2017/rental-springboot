@@ -15,7 +15,7 @@ public class TenantRegisterServiceImpl implements TenantRegisterService {
     public int register(Tenant tenant) {
         String input_name= tenant.getUsername();
         if(userService.findByName(input_name)!=null)
-            return Constant.USER_AREADY_EXIST;
+            return Constant.USER_ALREADY_EXIST;
         else {
             userService.save(tenant);
             return Constant.SUCCESS;

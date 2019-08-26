@@ -6,17 +6,17 @@ import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Date;
+
 @Data
-@Document(collection = "tenant")
+@Document(collection = "complaints")
 @AllArgsConstructor
 @ToString
-public class Tenant {
+public class Complaints {
     @Id
-    private String username;
-    private String password;
-    private String phone;
-    private String email;
-    private boolean isMale;
-    private int age;
-
+    private Long id;
+    private String message;
+    private Date createdTime;
+    private String TenantUsername;
+    private String MaintenancemanUsername;
 }

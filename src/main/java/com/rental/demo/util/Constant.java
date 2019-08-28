@@ -27,6 +27,9 @@ public class Constant {
     public static final int USER_HAS_NO_COM = 4001;
     //房间
     public static final int ROOM_AREADY_EXIST =2003;
+    public static final int LONGRENT=2004;//只能长租
+    public static final int SHORTRENT=2005;//只能短租
+    public static final int BOTHRENT=2006;//长租短租都可以
 
     //评价
     public static final int EVA_NOT_EXIST = 5001;

@@ -2,11 +2,13 @@ package com.rental.demo.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.rental.demo.entity.Evaluation;
+import com.rental.demo.repository.MaintenancemanRepository;
 import com.rental.demo.service.EvaluationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -14,6 +16,8 @@ import java.util.Map;
 public class EvaluationController {
     @Autowired
     private EvaluationService evaluationService;
+    @Autowired
+    private MaintenancemanRepository maintenancemanRepository;
     @CrossOrigin
     @RequestMapping(value = "/evaluation",method = RequestMethod.POST)
     @ResponseBody
@@ -26,7 +30,19 @@ public class EvaluationController {
     }
     @RequestMapping(value = "/evaluation",method = RequestMethod.DELETE)
     @ResponseBody
-    public Long delete(Long id){
+    public String delete(String id){
         return evaluationService.delete(id);
+    }
+
+    @RequestMapping(value = "/evaluation/change",method = RequestMethod.POST)
+    @ResponseBody
+    public int change(String id,String message){
+        return evaluationService.change(id, message);
+    }
+
+    @RequestMapping(value = "/evaluation/findByMTM",method = RequestMethod.GET)
+    @ResponseBody
+    public List<Evaluation> findByMaintenancemanUsername(String name){
+        return evaluationService.findByMaintenancemanUsername(name);
     }
 }

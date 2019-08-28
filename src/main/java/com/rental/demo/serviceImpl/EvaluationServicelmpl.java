@@ -7,7 +7,9 @@ import com.rental.demo.util.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EvaluationServicelmpl implements EvaluationService {
@@ -41,4 +43,20 @@ public class EvaluationServicelmpl implements EvaluationService {
         return evaluationRepository.findByTenantUsername(name);
     }
 
+    @Override
+    public List<Evaluation> findByMaintenancemanUsername(String name) {
+        return evaluationRepository.findByMaintenancemanUsername(name);
+    }
+
+    @Override
+    public int change(String id,String message){
+        if (evaluationRepository.existsById(id)==false)
+            return Constant.EVA_NOT_EXIST;
+        else {
+            Optional<Evaluation> evaluation = evaluationRepository.findById(id);
+            evaluation.get().setMessage(message);
+            evaluation.get().setLastChangeTime(new Date());
+            return Constant.SUCCESS;
+        }
+    }
 }

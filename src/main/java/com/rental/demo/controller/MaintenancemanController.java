@@ -29,4 +29,11 @@ public class MaintenancemanController {
     public int delete(@RequestParam(value = "username") String username){
         return repairmanService.delete(username);
     }
+
+    @RequestMapping(value = "/maintenanceman/findById",method = RequestMethod.GET)
+    @ResponseBody
+    public Maintenanceman findById(@RequestParam(value = "username")String username)
+    {
+        return maintenancemanService.findById(username);
+    }
 }

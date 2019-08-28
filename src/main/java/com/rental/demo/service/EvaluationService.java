@@ -9,4 +9,6 @@ public interface EvaluationService {
     public String delete(String id);
     public Evaluation findByid(String id);
     public List<Evaluation> findByTenantUsername(String name);
+    public List<Evaluation> findByMaintenancemanUsername(String name);
+    public int change(String id,String message);
 }

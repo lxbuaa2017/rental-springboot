@@ -41,4 +41,9 @@ public class MaintenancemanServicempl implements MaintenancemanService {
             return repairmanService.change(maintenanceman);
         }
     }
+
+    @Override
+    public Maintenanceman findById(String id) {
+        return repairmanService.findOne(id);
+    }
 }

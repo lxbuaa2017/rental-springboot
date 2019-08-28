@@ -2,7 +2,6 @@ package com.rental.demo.serviceImpl.TenantServiceImpl;
 
 import com.rental.demo.entity.LongRentOrder;
 import com.rental.demo.entity.ShortRentOrder;
-import com.rental.demo.entity.Tenant;
 import com.rental.demo.repository.LongRentOrderRepository;
 import com.rental.demo.repository.ShortRentOrderRepository;
 import com.rental.demo.service.TenantService.RentService;

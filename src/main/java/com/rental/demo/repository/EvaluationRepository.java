@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface EvaluationRepository extends MongoRepository<Evaluation,String> {
     List<Evaluation> findByTenantUsername(String name);
+    List<Evaluation> findByMaintenancemanUsername(String name);
 }

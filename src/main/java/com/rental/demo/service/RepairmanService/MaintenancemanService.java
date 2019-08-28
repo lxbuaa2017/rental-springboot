@@ -6,4 +6,5 @@ public interface MaintenancemanService {
     public int add(Maintenanceman maintenanceman);
     public int delete(String username);
     public int change(Maintenanceman maintenanceman);
+    public Maintenanceman findById(String id);
 }

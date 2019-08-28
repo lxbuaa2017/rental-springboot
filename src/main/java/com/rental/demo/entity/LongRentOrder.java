@@ -1,6 +1,8 @@
 package com.rental.demo.entity;
 
 import com.rental.demo.entity.File.PdfFile;
+import com.rental.demo.entity.Room;
+import com.rental.demo.entity.Tenant;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.ToString;
@@ -14,6 +16,7 @@ public class LongRentOrder {
     @Id
     private String Id;
     private Tenant tenant;
+    private String tenantId;
     private String checkInDay;
     private String leaveDay;
     private int state;

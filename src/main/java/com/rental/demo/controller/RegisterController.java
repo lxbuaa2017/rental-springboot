@@ -16,10 +16,10 @@ public class RegisterController {
     private UserService userService;
     @Autowired
     private TenantRegisterService tenantRegisterService;
-    @CrossOrigin
+    @CrossOrigin(origins = "http://114.115.160.38:8080", allowCredentials = "true")
     @RequestMapping(value = "/register",method = RequestMethod.POST)
     @ResponseBody
-    public int register(@RequestParam Map<String,Object> map){
+    public int register(@RequestBody Map<String,Object> map){
         String jsonString= JSON.toJSONString(map);
         Tenant tenant = JSON.parseObject(jsonString, Tenant.class);
         return tenantRegisterService.register(tenant);

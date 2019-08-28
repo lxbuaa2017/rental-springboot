@@ -20,7 +20,7 @@ public class GlobalCorsConfig {
                         .allowedHeaders("*")
                         .allowedMethods("*")
                         .allowCredentials(true)
-                        .allowedOrigins("http://localhost:8080");
+                        .allowedOrigins("http://114.115.160.38:8080");
             }
         };
     }

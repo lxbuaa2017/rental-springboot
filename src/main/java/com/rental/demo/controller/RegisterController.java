@@ -16,7 +16,7 @@ public class RegisterController {
 //    private UserService userService;
     @Autowired
     private TenantRegisterService tenantRegisterService;
-    @CrossOrigin(origins = "http://114.115.160.38:8080", allowCredentials = "true")
+    @CrossOrigin(origins = "http://localhost:8080", allowCredentials = "true")
     @RequestMapping(value = "/register",method = RequestMethod.POST)
     @ResponseBody
     public int register(@RequestBody Map<String,Object> map){

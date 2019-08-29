@@ -15,10 +15,12 @@ public class ImgController {
     private UploadImgService uploadImgService;
     @Autowired
     private ImgFileRepository imgFileRepository;
+
     @PostMapping("/file/uploadImage")
     public String uploadImg(@RequestParam(value = "image") MultipartFile file,@RequestParam(value = "address") String address) {
         return uploadImgService.uploadImg(file,address);
     }
+
     @GetMapping(value = "/file/image/{id}",produces = {MediaType.IMAGE_JPEG_VALUE,MediaType.IMAGE_PNG_VALUE})
     @ResponseBody
     public byte[] downloadImg(@PathVariable String id){
@@ -27,5 +29,15 @@ public class ImgController {
         if(imgFile!=null)
             data=imgFile.getContent().getData();
         return data;
+    }
+
+    @PostMapping("/file/removeAllImage")
+    public void removeAllImg(@RequestParam(value = "address") String address){
+        uploadImgService.removeAllImg(address);
+    }
+
+    @PostMapping("/file/removeOneImage")
+    public void removeOneImg(@RequestParam(value = "address") String address,@RequestParam(value = "url") String url){
+        uploadImgService.removeOneImg(address,url);
     }
 }

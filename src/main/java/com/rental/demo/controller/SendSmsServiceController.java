@@ -14,7 +14,7 @@ public class SendSmsServiceController {
     @Autowired
     private SendSmsService sendSmsService;
 
-    @CrossOrigin(origins = "http://114.115.160.38:8080", allowCredentials = "true")
+    @CrossOrigin(origins = "http://localhost:8080", allowCredentials = "true")
     @RequestMapping(value = "/sendSms", method = RequestMethod.POST)
     @ResponseBody
     public boolean sendSms(@RequestBody JSONObject jsonObject, HttpSession httpSession) {

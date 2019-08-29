@@ -12,7 +12,7 @@ public class ComplaintsServicelmpl implements ComplaintsService {
     @Autowired
     private ComplaintsRepository complaintsRepository;
     @Override
-    public String publish(Complaints complaints) {
+    public String addComplain(Complaints complaints) {
         complaintsRepository.save(complaints);
         return complaints.getId();
     }

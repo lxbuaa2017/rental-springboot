@@ -24,6 +24,9 @@ public static final int SUCCESS =1000;
     //投诉
     public static final int COM_NOT_EXIST = 4002;
     public static final int USER_HAS_NO_COM = 4001;
+    public static final int REPLIED=4004;//已回复
+    public static final int UNREPLIED=4003;//未回复
+
     //房间
     public static final int ROOM_AREADY_EXIST =2003;
     public static final int LONGRENT=2004;//只能长租

@@ -3,6 +3,6 @@ package com.rental.demo.service;
 import com.rental.demo.entity.Complaints;
 
 public interface ComplaintsService {
-    public String publish(Complaints complaints);
+    public String addComplain(Complaints complaints);
     public int delete(String id);
 }

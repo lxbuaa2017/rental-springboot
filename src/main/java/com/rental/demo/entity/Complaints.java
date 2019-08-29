@@ -6,7 +6,9 @@ import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Document(collection = "complaints")
@@ -16,7 +18,10 @@ public class Complaints {
     @Id
     private String id;
     private String message;
-    private Date createdTime;
-    private String TenantUsername;
-    private String MaintenancemanUsername;
+    private LocalDateTime createdTime;
+    private String tenantUsername;
+    private String taintenancemanUsername;
+    private String reply;
+    private int state;
+    private List<String> urls;
 }

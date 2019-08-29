@@ -16,9 +16,14 @@ public class ImgController {
     @Autowired
     private ImgFileRepository imgFileRepository;
 
+    @PostMapping("/file/uploadHouseImage")
+    public String uploadHouseImg(@RequestParam(value = "image") MultipartFile file,@RequestParam(value = "address") String address) {
+        return uploadImgService.uploadHouseImg(file,address);
+    }
+
     @PostMapping("/file/uploadImage")
-    public String uploadImg(@RequestParam(value = "image") MultipartFile file,@RequestParam(value = "address") String address) {
-        return uploadImgService.uploadImg(file,address);
+    public String uploadImg(@RequestParam(value = "image") MultipartFile file) {
+        return uploadImgService.uploadImg(file);
     }
 
     @GetMapping(value = "/file/image/{id}",produces = {MediaType.IMAGE_JPEG_VALUE,MediaType.IMAGE_PNG_VALUE})

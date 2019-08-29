@@ -1,37 +1,72 @@
 package com.rental.demo.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.rental.demo.entity.Complaints;
+import com.rental.demo.repository.ComplaintsRepository;
 import com.rental.demo.service.ComplaintsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 
+import static com.rental.demo.util.Constant.REPLIED;
+import static com.rental.demo.util.Constant.UNREPLIED;
+
 @RestController
-@RequestMapping("/")
+@RequestMapping("/complaints")
 public class ComplaintsController {
     @Autowired
     private ComplaintsService complaintsService;
+    @Autowired
+    private ComplaintsRepository complaintsRepository;
     @CrossOrigin
-    @RequestMapping(value = "/Complaints",method = RequestMethod.POST)
+    @RequestMapping(value = "/add",method = RequestMethod.POST)
     @ResponseBody
-    public String publish(@RequestBody Map<String,Object> map){
+    public String addComplain(@RequestBody Map<String,Object> map){
         String jsonString = JSON.toJSONString(map);
         Complaints complaints = JSON.parseObject(jsonString, Complaints.class);
-        complaints.setCreatedTime(new Date());
-        return complaintsService.publish(complaints);
+        complaints.setCreatedTime(LocalDateTime.now());
+        complaints.setState(UNREPLIED);
+        return complaintsService.addComplain(complaints);
     }
 
-    @RequestMapping(value = "/Complaints",method = RequestMethod.DELETE)
+    @CrossOrigin
+    @RequestMapping(value = "/delete",method = RequestMethod.POST)
+    @ResponseBody
     public int delete(@RequestParam("id") String id){
         return complaintsService.delete(id);
     }
+    @CrossOrigin
+    @RequestMapping(value = "/reply",method = RequestMethod.POST)
+    @ResponseBody
+    public void reply(@RequestBody JSONObject jsonObject){
+        String reply=jsonObject.getString("replyMessage");
+        String id=jsonObject.getString("complaintId");
+        Complaints complaints=complaintsRepository.findById(id).get();
+        complaints.setReply(reply);
+        complaints.setState(REPLIED);
+        complaintsRepository.save(complaints);
+    }
 
-    @GetMapping("/4")
-    public Complaints test(){
-        Complaints complaints = new Complaints("132456","not good",new Date(),"y199387","17236123");
-        return complaints;
+    @CrossOrigin
+    @RequestMapping(value="/getTenantComplaints",method = RequestMethod.POST)
+    @ResponseBody
+    public List<Complaints> getTenantComplaints(@RequestParam String username){
+        List<Complaints> list= complaintsRepository.findAllByTenantUsername(username);
+        Collections.sort(list, new Comparator<Complaints>() {
+            @Override
+            public int compare(Complaints o1, Complaints o2) {
+                if(o1.getCreatedTime().isAfter(o2.getCreatedTime()))
+                    return -1;
+                else
+                    return 1;
+            }
+        });
+        return list;
     }
 }

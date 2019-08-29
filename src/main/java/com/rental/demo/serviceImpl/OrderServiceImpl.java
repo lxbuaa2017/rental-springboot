@@ -37,7 +37,9 @@ public class OrderServiceImpl implements OrderService {
                     return null;
             }
             String str= JSON.toJSONString(longRentOrder);
-            return JSONObject.parseObject(str);
+            String str1="{\"type\":"+type+",\n" +
+                    "    \"order\":"+str+"}";
+            return JSONObject.parseObject(str1);
         }
         else if(type.equals("短租")){
             ShortRentOrder shortRentOrder=shortRentOrderRepository.findById(id).get();
@@ -46,7 +48,9 @@ public class OrderServiceImpl implements OrderService {
                     return null;
             }
             String str= JSON.toJSONString(shortRentOrder);
-            return JSONObject.parseObject(str);
+            String str1="{\"type\":"+type+",\n" +
+                    "    \"order\":"+str+"}";
+            return JSONObject.parseObject(str1);
         }
         return jsonObject;
     }

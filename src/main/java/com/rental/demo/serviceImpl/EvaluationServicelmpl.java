@@ -12,20 +12,19 @@ public class EvaluationServicelmpl implements EvaluationService {
     @Autowired
     EvaluationRepository evaluationRepository;
     @Override
-    public Long post(Evaluation evaluation) {
-        evaluationRepository.save(evaluation);
-        return evaluation.getId();
+    public String post(Evaluation evaluation) {
+        return evaluationRepository.save(evaluation).getId();
     }
 
     @Override
-    public Long delete(Long id) {
+    public String delete(String id) {
         evaluationRepository.deleteById(id);
         return id;
     }
 
 
     @Override
-    public Evaluation findByid(Long id) {
+    public Evaluation findByid(String id) {
         return evaluationRepository.findById(id).get();
     }
 

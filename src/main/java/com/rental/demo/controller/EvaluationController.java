@@ -17,7 +17,7 @@ public class EvaluationController {
     @CrossOrigin
     @RequestMapping(value = "/evaluation",method = RequestMethod.POST)
     @ResponseBody
-    public Long post(@RequestBody Map<String,Object> map) {
+    public String post(@RequestBody Map<String,Object> map) {
         String jsonString = JSON.toJSONString(map);
         Evaluation evaluation = JSON.parseObject(jsonString, Evaluation.class);
         evaluation.setCreatedTime(new Date());
@@ -26,7 +26,7 @@ public class EvaluationController {
     }
     @RequestMapping(value = "/evaluation",method = RequestMethod.DELETE)
     @ResponseBody
-    public Long delete(Long id){
+    public String delete(String id){
         return evaluationService.delete(id);
     }
 }

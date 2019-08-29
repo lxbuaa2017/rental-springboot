@@ -23,7 +23,7 @@ public class WorkOrder {            //工单
     private String description;      //问题描述
     private Date orderTime;          //工单建立日期
     private Tenant tenant;           //报修的租户
-    //todo 添加处理工单的师傅
+    //todo 添加处理工单的师傅id 未指定时为null
     private boolean isFinished;      //表示工单是否完成
     private Date finishTime;         //工单完成日期
 }

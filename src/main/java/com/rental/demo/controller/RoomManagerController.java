@@ -66,4 +66,11 @@ public class RoomManagerController {
     public Room getRoomById(@RequestParam String id){
         return roomRepository.findById(id).get();
     }
+
+    @CrossOrigin(origins = "http://localhost:8080", allowCredentials = "true")
+    @RequestMapping(value = "/removeById",method = RequestMethod.POST)
+    @ResponseBody
+    public void removeRoomById(@RequestParam String id){
+         roomRepository.deleteById(id);
+    }
 }

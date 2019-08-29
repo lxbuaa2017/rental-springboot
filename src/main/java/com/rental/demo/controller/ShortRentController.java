@@ -12,11 +12,11 @@ import java.time.LocalDate;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/api")
 public class ShortRentController {
     @Autowired
     private RentService rentService;
-    @CrossOrigin
+    //@CrossOrigin
     @RequestMapping(value = "/shortRentEnroll",method= RequestMethod.POST)
     @ResponseBody
     public int shortRentEnroll(@RequestBody Map<String,Object> map){

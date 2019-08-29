@@ -11,9 +11,9 @@ import static com.rental.demo.util.Constant.ERROR;
 import static com.rental.demo.util.Constant.SUCCESS;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/api")
 public class VerifiyCodeController {
-    @CrossOrigin(origins = "http://localhost:8080", allowCredentials = "true")
+    //@CrossOrigin(origins = "http://localhost:8080", allowCredentials = "true")
     @RequestMapping(value = "/verify", method = RequestMethod.POST)
     @ResponseBody
     public int verify(@RequestBody JSONObject jsonObject,

@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/api")
 public class MaintenancemanController {
     @Autowired
     private MaintenancemanService maintenancemanService;
     @Autowired
     private RepairmanService repairmanService;
-    @CrossOrigin
+    //@CrossOrigin
     @RequestMapping(value = "/maintenanceman",method = RequestMethod.POST)
     @ResponseBody
     public int post(@RequestBody Map<String,Object> map){

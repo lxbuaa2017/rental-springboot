@@ -10,11 +10,11 @@ import java.util.Date;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/api")
 public class EvaluationController {
     @Autowired
     private EvaluationService evaluationService;
-    @CrossOrigin
+    //@CrossOrigin
     @RequestMapping(value = "/evaluation",method = RequestMethod.POST)
     @ResponseBody
     public String post(@RequestBody Map<String,Object> map) {

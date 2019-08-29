@@ -18,13 +18,13 @@ import static com.rental.demo.util.Constant.REPLIED;
 import static com.rental.demo.util.Constant.UNREPLIED;
 
 @RestController
-@RequestMapping("/complaints")
+@RequestMapping("/api/complaints")
 public class ComplaintsController {
     @Autowired
     private ComplaintsService complaintsService;
     @Autowired
     private ComplaintsRepository complaintsRepository;
-    @CrossOrigin
+    //@CrossOrigin
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     @ResponseBody
     public String addComplain(@RequestBody Map<String,Object> map){
@@ -35,13 +35,13 @@ public class ComplaintsController {
         return complaintsService.addComplain(complaints);
     }
 
-    @CrossOrigin
+    //@CrossOrigin
     @RequestMapping(value = "/delete",method = RequestMethod.POST)
     @ResponseBody
     public int delete(@RequestParam("id") String id){
         return complaintsService.delete(id);
     }
-    @CrossOrigin
+    //@CrossOrigin
     @RequestMapping(value = "/reply",method = RequestMethod.POST)
     @ResponseBody
     public void reply(@RequestBody JSONObject jsonObject){
@@ -53,7 +53,7 @@ public class ComplaintsController {
         complaintsRepository.save(complaints);
     }
 
-    @CrossOrigin
+    //@CrossOrigin
     @RequestMapping(value="/getTenantComplaints",method = RequestMethod.POST)
     @ResponseBody
     public List<Complaints> getTenantComplaints(@RequestParam String username){

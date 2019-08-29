@@ -13,7 +13,7 @@ import static com.rental.demo.util.Constant.SUCCESS;
 @RestController
 @RequestMapping("/")
 public class VerifiyCodeController {
-    @CrossOrigin(origins = "http://localhost:8080", allowCredentials = "true")
+    @CrossOrigin(origins = "http://114.115.160.38:8080", allowCredentials = "true")
     @RequestMapping(value = "/verify", method = RequestMethod.POST)
     @ResponseBody
     public int verify(@RequestBody JSONObject jsonObject,

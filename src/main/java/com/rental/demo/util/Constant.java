@@ -1,8 +1,7 @@
 package com.rental.demo.util;
 
 public class Constant {
-    //操作成功
-    public static final int SUCCESS =1000;
+public static final int SUCCESS =1000;
     public static final int ERROR =9999;
 
     //注册登录
@@ -31,7 +30,6 @@ public class Constant {
     public static final int SHORTRENT=2005;//只能短租
     public static final int BOTHRENT=2006;//长租短租都可以
 
-    //评价Evaluation
+    //评价
     public static final int EVA_NOT_EXIST = 5001;
-    public static final int EVA_MTM_NOT_EXIST = 5002;//要评价的修理工不存在
 }

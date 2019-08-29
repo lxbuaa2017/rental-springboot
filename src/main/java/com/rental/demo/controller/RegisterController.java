@@ -12,11 +12,12 @@ import java.util.Map;
 @RestController
 @RequestMapping("/")
 public class RegisterController {
-    @Autowired
-    private UserService userService;
+    //    @Autowired
+//    private UserService userService;
     @Autowired
     private TenantRegisterService tenantRegisterService;
-    @CrossOrigin
+
+    @CrossOrigin(origins = "http://114.115.160.38:8080", allowCredentials = "true")
     @RequestMapping(value = "/register",method = RequestMethod.POST)
     @ResponseBody
     public int register(@RequestParam Map<String,Object> map){

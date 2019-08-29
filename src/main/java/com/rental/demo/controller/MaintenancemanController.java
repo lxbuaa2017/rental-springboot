@@ -20,6 +20,7 @@ public class MaintenancemanController {
     @ResponseBody
     public int post(@RequestBody Map<String,Object> map){
         String jsonString = JSON.toJSONString(map);
+        //return jsonString+" "+JSON.toJSONString(new Maintenanceman("y199387","174589654","17845612378","HuMZ",35,true,0));
         Maintenanceman maintenanceman = JSON.parseObject(jsonString,Maintenanceman.class);
         return maintenancemanService.add(maintenanceman);
     }
@@ -28,12 +29,5 @@ public class MaintenancemanController {
     @ResponseBody
     public int delete(@RequestParam(value = "username") String username){
         return repairmanService.delete(username);
-    }
-
-    @RequestMapping(value = "/maintenanceman/findById",method = RequestMethod.GET)
-    @ResponseBody
-    public Maintenanceman findById(@RequestParam(value = "username")String username)
-    {
-        return maintenancemanService.findById(username);
     }
 }

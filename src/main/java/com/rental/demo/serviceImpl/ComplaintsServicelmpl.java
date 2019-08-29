@@ -7,20 +7,18 @@ import com.rental.demo.util.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class ComplaintsServicelmpl implements ComplaintsService {
     @Autowired
     private ComplaintsRepository complaintsRepository;
     @Override
-    public String publish(Complaints complaints) {
+    public Long publish(Complaints complaints) {
         complaintsRepository.save(complaints);
         return complaints.getId();
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(Long id) {
         if(complaintsRepository.findById(id)==null){
             return Constant.COM_NOT_EXIST;
         }
@@ -28,15 +26,5 @@ public class ComplaintsServicelmpl implements ComplaintsService {
             complaintsRepository.deleteById(id);
             return Constant.SUCCESS;
         }
-    }
-
-    @Override
-    public List<Complaints> findByTenantUsername(String name) {
-        return complaintsRepository.findByTenantUsername(name);
-    }
-
-    @Override
-    public Complaints findById(String id){
-        return complaintsRepository.findById(id).get();
     }
 }

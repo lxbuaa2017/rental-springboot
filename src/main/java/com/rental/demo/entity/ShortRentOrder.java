@@ -6,6 +6,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Data
 @ToString
@@ -19,4 +20,5 @@ public class ShortRentOrder implements Serializable {
     private String tenantId;
     private int state;
     private Room room;
+    private LocalDateTime createdTime;
 }

@@ -11,4 +11,6 @@ import java.util.List;
 public interface RoomRepository extends MongoRepository<Room,String> {
     public List<Room> findByLandLord(LandLord landLord);
     public Room findByAddress(String address);
+
+    public List<Room> findByRentTypeAndState(int rentType, int state);
 }

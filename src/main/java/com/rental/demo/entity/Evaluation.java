@@ -14,7 +14,7 @@ import java.util.Date;
 @ToString
 public class Evaluation {
     @Id
-    private String id;
+    private Long id;
     private String TenantUsername;
     private String message;
     private String MaintenancemanUsername;

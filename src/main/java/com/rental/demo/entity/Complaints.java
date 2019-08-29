@@ -14,8 +14,9 @@ import java.util.Date;
 @ToString
 public class Complaints {
     @Id
-    private String id;
+    private Long id;
     private String message;
     private Date createdTime;
     private String TenantUsername;
+    private String MaintenancemanUsername;
 }

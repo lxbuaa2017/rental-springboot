@@ -66,4 +66,12 @@ public class InsertController {
                 roomManagerService.addRoom(room);
         }
     }
+
+    @RequestMapping(value = "/insertTenant", method = RequestMethod.GET)
+    @ResponseBody
+    public void insertTenant() {
+        for (int i = 0; i < 50; i++) {
+
+        }
+    }
 }

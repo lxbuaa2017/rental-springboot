@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
-import static com.rental.demo.util.Constant.ROOM_AREADY_EXIST;
-import static com.rental.demo.util.Constant.SUCCESS;
+import static com.rental.demo.util.Constant.*;
 
 @RestController
 @RequestMapping("/room")
@@ -21,7 +21,8 @@ public class RoomManagerController {
     private RoomManagerService roomManagerService;
     @Autowired
     private RoomRepository roomRepository;
-    @CrossOrigin(origins = "http://localhost:8080", allowCredentials = "true")
+
+    @CrossOrigin(origins = "http://114.115.160.38:8080", allowCredentials = "true")
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     @ResponseBody
     public String addRoom(@RequestBody Room room){
@@ -33,16 +34,38 @@ public class RoomManagerController {
             return JsonResult.build(SUCCESS,"房源成功录入",null);
         }
     }
-    @CrossOrigin(origins = "http://localhost:8080", allowCredentials = "true")
+
+    @CrossOrigin(origins = "http://114.115.160.38:8080", allowCredentials = "true")
     @RequestMapping(value = "/findAll",method = RequestMethod.GET)
     @ResponseBody
     public List<Room> getRoom(HttpSession httpSession){
         return roomRepository.findAll();
     }
-    @CrossOrigin(origins = "http://localhost:8080", allowCredentials = "true")
+
+    @CrossOrigin(origins = "http://114.115.160.38:8080", allowCredentials = "true")
+    @RequestMapping(value = "/findByRentType", method = RequestMethod.POST)
+    @ResponseBody
+    public List<Room> getRoomByRentType(@RequestBody JSONObject jsonObject, HttpSession httpSession) {
+        int rentType = jsonObject.getIntValue("rentType");
+        List<Room> rooms = new ArrayList<>();
+        List<Room> rooms1 = roomRepository.findByRentTypeAndState(rentType, FREE);
+        List<Room> rooms2 = roomRepository.findByRentTypeAndState(2006, FREE);
+        rooms.addAll(rooms1);
+        rooms.addAll(rooms2);
+        return rooms;
+    }
+
+    @CrossOrigin(origins = "http://114.115.160.38:8080", allowCredentials = "true")
     @RequestMapping(value = "/findByAddress",method = RequestMethod.GET)
     @ResponseBody
     public Room getRoomByAddress(@RequestParam String address){
         return roomRepository.findByAddress(address);
+    }
+
+    @CrossOrigin(origins = "http://114.115.160.38:8080", allowCredentials = "true")
+    @RequestMapping(value = "/findById", method = RequestMethod.GET)
+    @ResponseBody
+    public Room getRoomById(@RequestParam String id) {
+        return roomRepository.findById(id).get();
     }
 }

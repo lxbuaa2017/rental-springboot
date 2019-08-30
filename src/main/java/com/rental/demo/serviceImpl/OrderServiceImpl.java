@@ -10,6 +10,7 @@ import com.rental.demo.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -59,10 +60,6 @@ public class OrderServiceImpl implements OrderService {
         List<LongRentOrder> longRentOrders=longRentOrderRepository.findByTenantName(username);
         list.addAll(shortRentOrders);
         list.addAll(longRentOrders);
-        class Order{
-            String type;
-            Object object;
-        }
         Collections.sort(list, new Comparator<Object>() {
             @Override
             public int compare(Object o1, Object o2) {
@@ -87,13 +84,13 @@ public class OrderServiceImpl implements OrderService {
         });
         List<Object> orderList=new ArrayList<>();
         for(Object object:list){
-            Order order=new Order();
-            order.object=object;
+            JSONObject jsonObject=new JSONObject();
             if(object instanceof ShortRentOrder)
-                order.type="短租";
+                jsonObject.put("type","短租");
             else
-                order.type="长租";
-            orderList.add(order);
+                jsonObject.put("type","长租");
+            jsonObject.put("object",object);
+            orderList.add(jsonObject);
         }
         return orderList;
     }

@@ -11,10 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -62,6 +59,10 @@ public class OrderServiceImpl implements OrderService {
         List<LongRentOrder> longRentOrders=longRentOrderRepository.findByTenantName(username);
         list.addAll(shortRentOrders);
         list.addAll(longRentOrders);
+        class Order{
+            String type;
+            Object object;
+        }
         Collections.sort(list, new Comparator<Object>() {
             @Override
             public int compare(Object o1, Object o2) {
@@ -84,6 +85,16 @@ public class OrderServiceImpl implements OrderService {
                     return 1;
             }
         });
-        return list;
+        List<Object> orderList=new ArrayList<>();
+        for(Object object:list){
+            Order order=new Order();
+            order.object=object;
+            if(object instanceof ShortRentOrder)
+                order.type="短租";
+            else
+                order.type="长租";
+            orderList.add(order);
+        }
+        return orderList;
     }
 }

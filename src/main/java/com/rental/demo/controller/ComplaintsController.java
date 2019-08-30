@@ -57,7 +57,22 @@ public class ComplaintsController {
     @RequestMapping(value="/getTenantComplaints",method = RequestMethod.POST)
     @ResponseBody
     public List<Complaints> getTenantComplaints(@RequestParam String username){
-        List<Complaints> list= complaintsRepository.findAllByTenantUsername(username);
+        List<Complaints> list= complaintsRepository.findAllByTenantUsernameAndState(username,4003);
+        Collections.sort(list, new Comparator<Complaints>() {
+            @Override
+            public int compare(Complaints o1, Complaints o2) {
+                if(o1.getCreatedTime().isAfter(o2.getCreatedTime()))
+                    return -1;
+                else
+                    return 1;
+            }
+        });
+        return list;
+    }
+    @RequestMapping(value="/getRepliedComplaints",method = RequestMethod.POST)
+    @ResponseBody
+    public List<Complaints> getRepliedComplaints(@RequestParam String username){
+        List<Complaints> list= complaintsRepository.findAllByTenantUsernameAndState(username,4004);
         Collections.sort(list, new Comparator<Complaints>() {
             @Override
             public int compare(Complaints o1, Complaints o2) {

@@ -13,33 +13,26 @@ import java.util.List;
 public class OrderController {
     @Autowired
     private OrderService orderService;
+
     //@CrossOrigin(origins = "http://localhost:8080", allowCredentials = "true")
     @RequestMapping(value = "/getOrderTotal", method = RequestMethod.POST)
     @ResponseBody
-    public int getOrderTotal(HttpSession httpSession){
-        if(httpSession.getAttribute("username")==null)
-            return 0;
-        else {
-            return orderService.getOrderTotal(
-                    httpSession.getAttribute("username").toString());
-        }
+    public int getOrderTotal(@RequestBody JSONObject username) {
+        return orderService.getOrderTotal(username.getString("username"));
     }
+
     //@CrossOrigin(origins = "http://localhost:8080", allowCredentials = "true")
     @RequestMapping(value = "/getOrder", method = RequestMethod.POST)
     @ResponseBody
-    public JSONObject getOrder(String id,String type,HttpSession httpSession){
-        if(httpSession.getAttribute("username")==null)
-            return null;
-        String username=httpSession.getAttribute("username").toString();
-        return orderService.getOrder(username,id,type);
+    public JSONObject getOrder(@RequestBody JSONObject jsonObject) {
+        String str = orderService.getOrder(jsonObject.getString("username"), jsonObject.getString("id"), jsonObject.getString("type")).toJSONString();
+        return JSONObject.parseObject("{\"type\":" + jsonObject.getString("type") + ",\n" + "\"order\":" + str + "}");
     }
+
     //@CrossOrigin(origins = "http://localhost:8080", allowCredentials = "true")
     @RequestMapping(value = "/getAllOrder", method = RequestMethod.POST)
     @ResponseBody
-    public List<Object> getAllOrder(HttpSession httpSession){
-        if(httpSession.getAttribute("username")==null)
-            return null;
-        String username=httpSession.getAttribute("username").toString();
-        return orderService.getAllOrder(username);
+    public List<Object> getAllOrder(@RequestBody JSONObject jsonObject) {
+        return orderService.getAllOrder(jsonObject.getString("username"));
     }
 }

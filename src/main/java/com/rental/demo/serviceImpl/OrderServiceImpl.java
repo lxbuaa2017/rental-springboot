@@ -94,4 +94,17 @@ public class OrderServiceImpl implements OrderService {
         }
         return orderList;
     }
+
+    @Override
+    //182 357
+    public List<Object> getUnprocessedOrder() {
+        List<Object> list=new ArrayList<>();
+
+        return null;
+    }
+
+    @Override
+    public List<Object> getProcessedOrder() {
+        return null;
+    }
 }

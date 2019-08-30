@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface LongRentOrderRepository extends MongoRepository<LongRentOrder,String> {
     public List<LongRentOrder> findByTenantName(String tenantName);
+    public List<LongRentOrder> findAllByState(int state);
 }

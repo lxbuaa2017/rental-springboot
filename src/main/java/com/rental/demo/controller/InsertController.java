@@ -8,13 +8,31 @@ import com.rental.demo.repository.PdfFileRepository;
 import com.rental.demo.repository.RoomRepository;
 import com.rental.demo.service.PdfContractService;
 import com.rental.demo.service.RoomManagerService;
+
 import com.rental.demo.serviceImpl.RandomLocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+
+import com.rental.demo.service.UploadImgService;
+import com.rental.demo.serviceImpl.RandomLocalDate;
+import com.rental.demo.util.Constant;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockMultipartFile;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+
+
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import java.time.LocalDateTime;
 
@@ -25,10 +43,13 @@ public class InsertController {
     private RoomManagerService roomManagerService;
     @Autowired
     private RoomRepository roomRepository;
+    @Autowired
+    private UploadImgService uploadImgService;
     RandomLocalDate randomLocalDate = new RandomLocalDate();
     @RequestMapping(value = "/insrtRoom",method = RequestMethod.GET)
     @ResponseBody
-    public void insertRoom(){
+    public String insertRoom() throws IOException {
+
         LandLord lan = new LandLord("firstman","123456","132123456789","13212345678@163.com",true,45);
         LandLord lee = new LandLord("secondman","123456","18612345678","18612345678@sina.com",false,26);
         LandLord zhou = new LandLord("thirdman","123456","18812345678","18812345678@126.com",true,35);
@@ -64,7 +85,11 @@ public class InsertController {
             if(roomRepository.findByAddress(room.getAddress())!=null);
             else
                 roomManagerService.addRoom(room);
+            File file = new File("E:/testpicture/test.jpg");
+            MultipartFile multipartFile = new MockMultipartFile("test.jpg","test.jpg",null, new FileInputStream(file));
+            uploadImgService.uploadImg(multipartFile,room.getAddress());
         }
+        return String.valueOf(Constant.SUCCESS);
     }
 
     @RequestMapping(value = "/insertTenant", method = RequestMethod.GET)

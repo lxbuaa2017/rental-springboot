@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/api")
 public class LoginController {
     @Autowired
     private UserService userService;
 
-    @CrossOrigin
+    //@CrossOrigin
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     public int login(@RequestBody Map<String, Object> map) {

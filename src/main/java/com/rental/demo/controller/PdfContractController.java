@@ -12,7 +12,7 @@ import org.w3c.dom.DocumentType;
 import java.time.LocalDateTime;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/api")
 public class PdfContractController {
     @Autowired
     private PdfContractService pdfContractService;

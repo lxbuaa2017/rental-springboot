@@ -87,7 +87,7 @@ public class InsertController {
                 roomManagerService.addRoom(room);
             File file = new File("E:/testpicture/test.jpg");
             MultipartFile multipartFile = new MockMultipartFile("test.jpg","test.jpg",null, new FileInputStream(file));
-            uploadImgService.uploadImg(multipartFile,room.getAddress());
+            uploadImgService.uploadHouseImg(multipartFile,room.getAddress());
         }
         return String.valueOf(Constant.SUCCESS);
     }

@@ -13,11 +13,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/api")
 public class LongRentController {
     @Autowired
     private RentService rentService;
-    @CrossOrigin
+    //@CrossOrigin
     @RequestMapping(value = "/longRentEnroll",method= RequestMethod.POST)
     @ResponseBody
     public int longRentEnroll(@RequestBody Map<String,Object> map){

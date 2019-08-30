@@ -5,7 +5,7 @@ import com.rental.demo.entity.Evaluation;
 import java.util.List;
 
 public interface EvaluationService {
-    public Long post(Evaluation evaluation);
-    public Long delete(Long id);
-    public Evaluation findByid(Long id);
+    public String post(Evaluation evaluation);
+    public String delete(String id);
+    public Evaluation findByid(String id);
 }

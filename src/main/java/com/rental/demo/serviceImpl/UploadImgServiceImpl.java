@@ -28,7 +28,7 @@ public class UploadImgServiceImpl implements UploadImgService {
     @Autowired
     private RoomRepository roomRepository;
     @Override
-    public String uploadImg(MultipartFile file,String address) {
+    public String uploadHouseImg(MultipartFile file, String address) {
         if(file.isEmpty())
             return JsonResult.build(ERROR,"未选择图片",null);
         String jsonResult=null;
@@ -57,6 +57,48 @@ public class UploadImgServiceImpl implements UploadImgService {
         catch (IOException e){
             e.printStackTrace();
             return JsonResult.build(ERROR,"发生IO异常，上传失败",null);
+        }
+    }
+    @Override
+    public String uploadImg(MultipartFile file) {
+        if(file.isEmpty())
+            return JsonResult.build(ERROR,"未选择图片",null);
+        String jsonResult=null;
+        String fileName=file.getOriginalFilename();
+        try{
+            ImgFile imgFile=new ImgFile();
+            imgFile.setName(fileName);
+            imgFile.setCreatedTime(LocalDateTime.now());
+            imgFile.setContent(new Binary(file.getBytes()));
+            imgFile.setContentType(file.getContentType());
+            imgFile.setSize(file.getSize());
+            ImgFile saveImg=imgFileRepository.save(imgFile);
+            String url= "http://114.115.160.38:8081/file/image/"+saveImg.getId();
+            return url;
+        }
+        catch (IOException e){
+            e.printStackTrace();
+            return JsonResult.build(ERROR,"发生IO异常，上传失败",null);
+        }
+    }
+    @Override
+    public void removeAllImg(String address) {
+        Room room=roomRepository.findByAddress(address);
+        for(String url:room.getImageUrls()){
+            imgFileRepository.deleteById(url);
+            room.getImageUrls().remove(url);
+        }
+    }
+
+    @Override
+    public void removeOneImg(String address, String url) {
+        Room room=roomRepository.findByAddress(address);
+        for(String url1:room.getImageUrls()){
+            if(url1.equals(url)){
+                room.getImageUrls().remove(url1);
+                imgFileRepository.deleteById(url);
+                return;
+            }
         }
     }
 }

@@ -12,13 +12,13 @@ public class ComplaintsServicelmpl implements ComplaintsService {
     @Autowired
     private ComplaintsRepository complaintsRepository;
     @Override
-    public Long publish(Complaints complaints) {
+    public String addComplain(Complaints complaints) {
         complaintsRepository.save(complaints);
         return complaints.getId();
     }
 
     @Override
-    public int delete(Long id) {
+    public int delete(String id) {
         if(complaintsRepository.findById(id)==null){
             return Constant.COM_NOT_EXIST;
         }

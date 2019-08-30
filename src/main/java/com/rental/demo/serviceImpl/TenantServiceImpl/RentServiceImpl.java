@@ -12,6 +12,8 @@ import com.rental.demo.util.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 import static com.rental.demo.util.Constant.*;
 
 @Service
@@ -33,6 +35,7 @@ public class RentServiceImpl implements RentService {
            else {
                Room room=shortRentOrder.getRoom();//把房间置为出租状态
                room.setState(RENTED);
+               room.setRentTime(LocalDateTime.now());
                roomRepository.save(room);
                shortRentOrder.setState(WAIT_CONFIRM);//订单等待商家审核
                shortRentOrderRepository.save(shortRentOrder);//存入数据库使得商家可以审核
@@ -52,6 +55,7 @@ public class RentServiceImpl implements RentService {
             else{
                 Room room=longRentOrder.getRoom();
                 room.setState(RENTED);
+                room.setRentTime(LocalDateTime.now());
                 roomRepository.save(room);
                 longRentOrder.setState(Constant.WAIT_CONFIRM);
                 longRentOrderRepository.save(longRentOrder);

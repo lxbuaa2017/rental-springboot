@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.rental.demo.entity.Complaints;
 import com.rental.demo.entity.WorkOrder;
 import com.rental.demo.service.WorkOrderService;
+import com.rental.demo.util.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,11 +15,12 @@ import java.util.Map;
 public class WorkOrderController {
     @Autowired
     private WorkOrderService workOrderService;
-    @CrossOrigin(origins = "http://114.115.160.38:8080", allowCredentials = "true")
+    @CrossOrigin
     @RequestMapping(value = "/workorder/add",method = RequestMethod.POST)
     public int publish(@RequestBody Map<String,Object> map){
         String jsonString = JSON.toJSONString(map);
         WorkOrder workOrder = JSON.parseObject(jsonString, WorkOrder.class);
+        workOrder.setStats(Constant.WOD_NOT_RES);
         return workOrderService.addWorkOrder(workOrder);
     }
 

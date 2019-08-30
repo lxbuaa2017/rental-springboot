@@ -18,7 +18,7 @@ public class WorkOrder {
     private String id;
     private String message;
     private String TenantName;
-    private int stats = Constant.WOD_NOT_RES;
+    private int stats;
     private String MaintenanceName;
     private List<String> imageUrls;
     private int score;

@@ -25,6 +25,7 @@ public class Room {
     private Tenant renter;
     private LocalDateTime rentTime;
     private LocalDateTime dueTime;
+    private LocalDateTime createdTime;
     private int state;
     private int rentType;
     private List<String> imageUrls;

@@ -24,4 +24,5 @@ public class WorkOrder {
     private List<String> imageUrls;
     private int score;
     private LocalDateTime createdTime;
+    private  String address;
 }

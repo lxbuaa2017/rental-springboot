@@ -1,6 +1,7 @@
 package com.rental.demo.serviceImpl.MaintenancemanServicelmpl;
 
 import com.rental.demo.entity.Maintenanceman;
+import com.rental.demo.repository.MaintenancemanRepository;
 import com.rental.demo.service.RepairmanService.MaintenancemanService;
 import com.rental.demo.service.RepairmanService.RepairmanService;
 import com.rental.demo.util.Constant;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Service;
 public class MaintenancemanServicempl implements MaintenancemanService {
     @Autowired
     private RepairmanService repairmanService;
+    @Autowired
+    private MaintenancemanRepository maintenancemanRepository;
     @Override
     public int add(Maintenanceman maintenanceman) {
         String input_name = maintenanceman.getUsername();
@@ -40,5 +43,12 @@ public class MaintenancemanServicempl implements MaintenancemanService {
         else{
             return repairmanService.change(maintenanceman);
         }
+    }
+
+    @Override
+    public Maintenanceman findByUsername(String Username) {
+        if(maintenancemanRepository.existsByUsername(Username)==false)
+            return null;
+        return maintenancemanRepository.findByUsername(Username);
     }
 }

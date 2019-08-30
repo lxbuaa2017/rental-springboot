@@ -41,7 +41,7 @@ public class UploadImgServiceImpl implements UploadImgService {
             imgFile.setContentType(file.getContentType());
             imgFile.setSize(file.getSize());
             ImgFile saveImg=imgFileRepository.save(imgFile);
-            String url= "http://localhost:8081/file/image/"+saveImg.getId();
+            String url= "http://114.115.160.38:8081/file/image/"+saveImg.getId();
             Room room=roomRepository.findByAddress(address);
             List<String> list=new LinkedList<>();
             if(room.getImageUrls()==null){

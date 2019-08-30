@@ -19,4 +19,7 @@ public class Maintenanceman {
     private int age;
     private boolean isMale;
     private int status;
+    private double Ascore;
+    private double times;
+    private double score;
 }

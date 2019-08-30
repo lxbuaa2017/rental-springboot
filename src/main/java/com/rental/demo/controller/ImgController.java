@@ -25,9 +25,9 @@ public class ImgController {
     }
 
     //@CrossOrigin(origins = "http://localhost:8080", allowCredentials = "true")
-    @PostMapping("/file/uploadImage")
+    @RequestMapping(value = "/file/uploadImage",method = RequestMethod.POST,consumes = "multipart/form-data")
     @ResponseBody
-    public String uploadImg(@RequestParam(value = "file") MultipartFile file) {
+    public String uploadImg(@RequestPart("file") MultipartFile file) {
         return uploadImgService.uploadImg(file);
     }
 

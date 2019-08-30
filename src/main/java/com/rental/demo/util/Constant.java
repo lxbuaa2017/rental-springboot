@@ -8,9 +8,11 @@ public static final int SUCCESS =1000;
     public static final int USER_ALREADY_EXIST =1028;
 
     //订单
-    public static final int WAIT_CONFIRM =1823;//待审核
-    public static final int WAIT_PAY =1824;//待付租金
-    public static final int PAID =1825;//已付租金
+    public static final int WAIT_CONFIRM =1823;//待审核订单
+    public static final int WAIT_PAY =1824;//待付款订单
+    public static final int PAID =1825;//款项待确认订单
+    public static final int INN=1826;//在住订单
+    public static final int RELET_PAID=1827;//续租款项待确认订单
 
     //房间状态
     public static final int RENTED =2001;

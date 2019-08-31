@@ -140,4 +140,12 @@ public class LongRentController {
         longRentOrder.setState(1827);
         longRentOrderRepository.save(longRentOrder);
     }
+
+
+    //删除订单
+    @PostMapping("/deleteLongRentOrder")
+    @ResponseBody
+    public void deleteLongRentOrder(@RequestParam String id) {
+        longRentOrderRepository.deleteById(id);
+    }
 }

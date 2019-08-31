@@ -54,7 +54,7 @@ public class ShortRentController {
         String jsonString = JSON.toJSONString(map);
         ShortRentOrder shortRentOrder = JSON.parseObject(jsonString, ShortRentOrder.class);
         int state = (int) jsonObject.get("state");
-        int days = Integer.parseInt((String) jsonObject.get("days"));
+        int days = (int)jsonObject.get("days");
         LocalDate dueTime = LocalDate.parse(shortRentOrder.getLeaveDay(),
                 DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         shortRentOrder.setLeaveDay(dueTime.plusDays(days).toString());
@@ -67,5 +67,12 @@ public class ShortRentController {
     public void applyShortRentRelet(@RequestBody ShortRentOrder shortRentOrder) {
         shortRentOrder.setState(1827);
         shortRentOrderRepository.save(shortRentOrder);
+    }
+
+    //删除订单
+    @PostMapping("/deleteShortRentOrder")
+    @ResponseBody
+    public void deleteShortRentOrder(@RequestParam String id) {
+        shortRentOrderRepository.deleteById(id);
     }
 }

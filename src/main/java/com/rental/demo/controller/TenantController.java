@@ -22,4 +22,10 @@ public class TenantController {
     public List<Tenant> getAllTenant(){
         return tenantRepository.findAll();
     }
+
+    @GetMapping("tenant/getByName")
+    @ResponseBody
+    public Tenant getByName(String name){
+        return tenantRepository.findByUsername(name);
+    }
 }

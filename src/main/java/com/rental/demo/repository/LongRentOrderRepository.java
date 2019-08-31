@@ -12,4 +12,6 @@ public interface LongRentOrderRepository extends MongoRepository<LongRentOrder, 
     public List<LongRentOrder> findByTenantName(String tenantName);
     public List<LongRentOrder> findAllByState(int state);
     public List<LongRentOrder> findAllByStateAndLeaveDayAfter(int state, String time);
+    public List<LongRentOrder> findAllByUrlExists();
+    public List<LongRentOrder> findAllByLeaveDayBefore(String now);
 }

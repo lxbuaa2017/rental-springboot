@@ -13,6 +13,8 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import static com.rental.demo.util.Constant.*;
@@ -150,5 +152,17 @@ public class LongRentController {
     @ResponseBody
     public void deleteLongRentOrder(@RequestParam String id) {
         longRentOrderRepository.deleteById(id);
+    }
+
+    @GetMapping("/getlongRentOrderContract")
+    @ResponseBody
+    public List<LongRentOrder> getlongRentOrderContract(){
+        List<LongRentOrder> longRentOrders= longRentOrderRepository.findAll();
+        List<LongRentOrder> returnOrders=new ArrayList<>();
+        for(LongRentOrder each:longRentOrders){
+            if(each.getUrl()!=null)
+                returnOrders.add(each);
+        }
+        return returnOrders;
     }
 }

@@ -18,5 +18,4 @@ public class LongRentOrder {
     private Tenant tenant;
     private int state;
     private Room room;
-    private boolean reminded;     //标记本月是否提醒过提交租金
 }

@@ -34,7 +34,7 @@ public class SendSmsServiceController {
     public boolean sendRemindSms(@RequestParam("long_rent_order") LongRentOrder longRentOrder, HttpSession httpSession
     ){
         String phone=longRentOrder.getTenant().getPhone();
-        String code=sendSmsService.sendReminderSms(longRentOrder);
+        String code=sendSmsService.sendReminderSms(phone);
         if(code.equals("发送失败"))
             return false;
         else{

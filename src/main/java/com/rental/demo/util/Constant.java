@@ -37,4 +37,10 @@ public static final int SUCCESS =1000;
 
     //评价
     public static final int EVA_NOT_EXIST = 5001;
+
+    //工单
+    public static final int WOD_NOT_RES = 6001;//工单待处理
+    public static final int WOD_ING_RES = 6002;//工单处理中
+    public static final int WOD_FIS_RES = 6003;//工单已处理
+    public static final int WOD_ALR_RES = 6004;//工单已评价
 }

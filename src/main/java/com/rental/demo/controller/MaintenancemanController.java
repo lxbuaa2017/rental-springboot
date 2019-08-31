@@ -25,9 +25,16 @@ public class MaintenancemanController {
         return maintenancemanService.add(maintenanceman);
     }
 
-    @RequestMapping(value = "/maintenanceman",method = RequestMethod.DELETE)
+    @RequestMapping(value = "/maintenanceman/delete",method = RequestMethod.POST)
     @ResponseBody
     public int delete(@RequestParam(value = "username") String username){
         return repairmanService.delete(username);
+    }
+
+    @RequestMapping(value = "/miantenanceman/getscore",method = RequestMethod.GET)
+    @ResponseBody
+    public double showscore(@RequestParam(value = "username")String username){
+        Maintenanceman maintenanceman = maintenancemanService.findByUsername(username);
+        return maintenanceman.getAscore()/maintenanceman.getTimes();
     }
 }

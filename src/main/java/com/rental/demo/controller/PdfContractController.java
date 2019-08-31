@@ -14,6 +14,7 @@ import org.w3c.dom.DocumentType;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -58,5 +59,11 @@ public class PdfContractController {
         if(pdfFile!=null)
             data=pdfFile.getContent().getData();
         return data;
+    }
+
+    @GetMapping(value = "file/getAllContract")
+    @ResponseBody
+    public List<PdfFile> getAllContract(){
+        return pdfFileRepository.findAll();
     }
 }

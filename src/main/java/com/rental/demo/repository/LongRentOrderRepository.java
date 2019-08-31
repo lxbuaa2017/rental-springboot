@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
-public interface LongRentOrderRepository extends MongoRepository<LongRentOrder,String> {
+public interface LongRentOrderRepository extends MongoRepository<LongRentOrder, String> {
     public List<LongRentOrder> findByTenantName(String tenantName);
     public List<LongRentOrder> findAllByState(int state);
     public List<LongRentOrder> findAllByStateAndLeaveDayAfter(int state, String time);

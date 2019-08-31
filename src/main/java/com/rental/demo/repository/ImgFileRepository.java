@@ -6,5 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ImgFileRepository extends MongoRepository<ImgFile,String> {
-    public void deleteById(String id);
 }

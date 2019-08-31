@@ -7,6 +7,7 @@ import com.rental.demo.util.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.Null;
 import java.util.List;
 
 @Service
@@ -20,10 +21,6 @@ public class RepairmanServicelmpl implements RepairmanService {
 
 
 
-    @Override
-    public Maintenanceman findByRealName(String name) {
-        return maintenancemanRepository.findByRealname(name);
-    }
 
     @Override
     public Maintenanceman save(Maintenanceman maintenanceman) {

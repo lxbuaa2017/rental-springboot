@@ -136,7 +136,10 @@ public class LongRentController {
     //续租（客户申请）
     @PostMapping("/applyLongRentRelet")
     @ResponseBody
-    public void applyLongRentRelet(@RequestBody LongRentOrder longRentOrder) {
+    public void applyLongRentRelet(@RequestBody JSONObject jsonObject) {
+        Map<String, Object> map = (Map<String, Object>) jsonObject.get("longRentOrder");
+        String jsonString = JSON.toJSONString(map);
+        LongRentOrder longRentOrder = JSON.parseObject(jsonString, LongRentOrder.class);
         longRentOrder.setState(1827);
         longRentOrderRepository.save(longRentOrder);
     }

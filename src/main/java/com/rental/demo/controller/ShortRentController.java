@@ -34,8 +34,10 @@ public class ShortRentController {
     @PostMapping("/setShortRentState")
     @ResponseBody
     public void setShortRentState(@RequestBody JSONObject jsonObject){
-        ShortRentOrder shortRentOrder=(ShortRentOrder) jsonObject.get("shortRentOrder");
-        int state=Integer.valueOf((String)jsonObject.get("state"));
+        Map<String, Object> map = (Map<String, Object>) jsonObject.get("shortRentOrder");
+        String jsonString = JSON.toJSONString(map);
+        ShortRentOrder shortRentOrder = JSON.parseObject(jsonString, ShortRentOrder.class);
+        int state = (int) jsonObject.get("state");
         shortRentOrder.setState(state);
         shortRentOrderRepository.save(shortRentOrder);
     }

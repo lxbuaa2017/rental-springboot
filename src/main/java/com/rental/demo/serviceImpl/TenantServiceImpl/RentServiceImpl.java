@@ -38,6 +38,7 @@ public class RentServiceImpl implements RentService {
                room.setRentTime(LocalDateTime.now());
                roomRepository.save(room);
                shortRentOrder.setState(WAIT_CONFIRM);//订单等待商家审核
+               shortRentOrder.setCreatedTime(LocalDateTime.now());
                shortRentOrderRepository.save(shortRentOrder);//存入数据库使得商家可以审核
                return SUCCESS;
            }
@@ -58,6 +59,7 @@ public class RentServiceImpl implements RentService {
                 room.setRentTime(LocalDateTime.now());
                 roomRepository.save(room);
                 longRentOrder.setState(Constant.WAIT_CONFIRM);
+                longRentOrder.setCreatedTime(LocalDateTime.now());
                 longRentOrderRepository.save(longRentOrder);
                 return SUCCESS;
             }

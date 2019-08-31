@@ -94,4 +94,59 @@ public class OrderServiceImpl implements OrderService {
         }
         return orderList;
     }
+
+    @Override
+    //182 357
+    public List<Object> getUnprocessedOrder() {
+        List<Object> list=new ArrayList<>();
+        List<LongRentOrder> longRentOrders=new ArrayList<>();
+        List<LongRentOrder> longRentOrders1=longRentOrderRepository.findAllByState(1823);
+        List<LongRentOrder> longRentOrders2=longRentOrderRepository.findAllByState(1825);
+        List<LongRentOrder> longRentOrders3=longRentOrderRepository.findAllByState(1827);
+        longRentOrders.addAll(longRentOrders1);longRentOrders.addAll(longRentOrders2);longRentOrders.addAll(longRentOrders3);
+        for(LongRentOrder longRentOrder:longRentOrders){
+            JSONObject jsonObject=new JSONObject();
+            jsonObject.put("type","长租");
+            jsonObject.put("object",longRentOrder);
+            list.add(jsonObject);
+        }
+        List<ShortRentOrder> shortRentOrders=new ArrayList<>();
+        List<ShortRentOrder> shortRentOrders1=shortRentOrderRepository.findAllByState(1823);
+        List<ShortRentOrder> shortRentOrders2=shortRentOrderRepository.findAllByState(1825);
+        List<ShortRentOrder> shortRentOrders3=shortRentOrderRepository.findAllByState(1827);
+        shortRentOrders.addAll(shortRentOrders1);shortRentOrders.addAll(shortRentOrders2);shortRentOrders.addAll(shortRentOrders3);
+        for(ShortRentOrder shortRentOrder:shortRentOrders){
+            JSONObject jsonObject=new JSONObject();
+            jsonObject.put("type","短租");
+            jsonObject.put("object",shortRentOrder);
+            list.add(jsonObject);
+        }
+        return list;
+    }
+
+    @Override
+    public List<Object> getProcessedOrder() {
+        List<Object> list=new ArrayList<>();
+        List<LongRentOrder> longRentOrders=new ArrayList<>();
+        List<LongRentOrder> longRentOrders1=longRentOrderRepository.findAllByState(1824);
+        List<LongRentOrder> longRentOrders2=longRentOrderRepository.findAllByState(1826);
+        longRentOrders.addAll(longRentOrders1);longRentOrders.addAll(longRentOrders2);
+        for(LongRentOrder longRentOrder:longRentOrders){
+            JSONObject jsonObject=new JSONObject();
+            jsonObject.put("type","长租");
+            jsonObject.put("object",longRentOrder);
+            list.add(jsonObject);
+        }
+        List<ShortRentOrder> shortRentOrders=new ArrayList<>();
+        List<ShortRentOrder> shortRentOrders1=shortRentOrderRepository.findAllByState(1824);
+        List<ShortRentOrder> shortRentOrders2=shortRentOrderRepository.findAllByState(1826);
+        shortRentOrders.addAll(shortRentOrders1);shortRentOrders.addAll(shortRentOrders2);
+        for(ShortRentOrder shortRentOrder:shortRentOrders){
+            JSONObject jsonObject=new JSONObject();
+            jsonObject.put("type","短租");
+            jsonObject.put("object",shortRentOrder);
+            list.add(jsonObject);
+        }
+        return list;
+    }
 }

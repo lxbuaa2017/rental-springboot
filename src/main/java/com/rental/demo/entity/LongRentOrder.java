@@ -15,13 +15,14 @@ import java.time.LocalDateTime;
 @Document(collection = "long_rent_order")
 public class LongRentOrder {
     @Id
-    private String Id;
+    private String id;
     private String tenantName;
     private String tenantId;
     private String checkInDay;
     private String leaveDay;
     private int state;
     private Room room;
-    private PdfFile pdffile;
+    private String url;
     private LocalDateTime createdTime;
+    private int months;
 }

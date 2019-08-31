@@ -21,4 +21,5 @@ public class ShortRentOrder implements Serializable {
     private int state;
     private Room room;
     private LocalDateTime createdTime;
+    private int days;
 }

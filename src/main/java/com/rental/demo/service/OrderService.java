@@ -10,4 +10,6 @@ public interface OrderService {
     public JSONObject getOrder(String username, String id, String type);
 
     public <T> List<T> getAllOrder(String username);
+    public List<Object> getUnprocessedOrder();
+    public List<Object> getProcessedOrder();
 }

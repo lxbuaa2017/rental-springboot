@@ -21,7 +21,7 @@ public class WorkOrder {
     private String tenantName;
     private int stats;
     private String maintenanceName;
-    private List<String> imageUrls;
+    private List<String> urls;
     private int score;
     private LocalDateTime createdTime;
     private  String address;

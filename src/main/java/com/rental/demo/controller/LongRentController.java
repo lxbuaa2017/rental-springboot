@@ -111,4 +111,10 @@ public class LongRentController {
         longRentOrder.setState(state);
         longRentOrderRepository.save(longRentOrder);
     }
+
+    @GetMapping("/getLongRentOrderById")
+    @ResponseBody
+    public LongRentOrder getLongRentOrderById(@RequestParam String id){
+        return longRentOrderRepository.findById(id).get();
+    }
 }

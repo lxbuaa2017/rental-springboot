@@ -14,12 +14,7 @@ public class Maintenanceman {
     @Id
     private String id;
     private String username;
-    private String password;
     private String phone;
-    private String realname;
-    private int age;
-    private boolean isMale;
-    private int status;
-    private double Ascore;
+    private double ascore;
     private double times;
 }

@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/api")
 public class WorkOrderController {
     @Autowired
     private WorkOrderService workOrderService;
@@ -24,6 +24,7 @@ public class WorkOrderController {
     private WorkOrderRepository workOrderRepository;
     @CrossOrigin
     @RequestMapping(value = "/workorder/add",method = RequestMethod.POST)
+    @ResponseBody
     public int publish(@RequestBody Map<String,Object> map){
         String jsonString = JSON.toJSONString(map);
         WorkOrder workOrder = JSON.parseObject(jsonString, WorkOrder.class);
@@ -33,23 +34,27 @@ public class WorkOrderController {
     }
 
     @RequestMapping(value = "/workorder/distribution",method = RequestMethod.POST)
+    @ResponseBody
     public int distribution(@RequestParam(value = "id") String id,@RequestParam(value = "name") String name){
         return workOrderService.distribution(id,name);
     }
 
     @RequestMapping(value = "/workorder/finish",method = RequestMethod.POST)
+    @ResponseBody
     public int finish(@RequestParam(value = "id") String id){
         return workOrderService.finish(id);
     }
 
     @RequestMapping(value = "/workorder/evaluate",method = RequestMethod.POST)
-    public int evaluate(@RequestParam(value = "id") String id,@RequestParam(value = "score") int score){
+    @ResponseBody
+    public int evaluate(@RequestParam(value = "username") String id,@RequestParam(value = "score") int score){
         return workOrderService.evaluate(id, score);
     }
 
     @RequestMapping(value = "/workorder/getbyTenant",method = RequestMethod.POST)
-    public List<WorkOrder> getByTenant(@RequestParam(value = "name") String name){
-        List<WorkOrder> list = workOrderRepository.findAllByTenantName(name);
+    @ResponseBody
+    public List<WorkOrder> getByTenant(@RequestParam String username){
+        List<WorkOrder> list = workOrderRepository.findALLByTenantNameAndStats(username,6001);
         Collections.sort(list, new Comparator<WorkOrder>() {
             @Override
             public int compare(WorkOrder o1, WorkOrder o2) {
@@ -63,7 +68,8 @@ public class WorkOrderController {
     }
 
     @RequestMapping(value = "/workorder/getfinish",method = RequestMethod.POST)
-    public List<WorkOrder> getByStatus(@RequestParam(value = "name")String name){
+    @ResponseBody
+    public List<WorkOrder> getByStatus(@RequestParam(value = "username")String name){
         List<WorkOrder> list = workOrderRepository.findALLByTenantNameAndStats(name,Constant.WOD_FIS_RES);
         Collections.sort(list, new Comparator<WorkOrder>() {
             @Override

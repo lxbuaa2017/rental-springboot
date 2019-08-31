@@ -2,6 +2,7 @@ package com.rental.demo.serviceImpl;
 
 import com.rental.demo.entity.Maintenanceman;
 import com.rental.demo.entity.WorkOrder;
+import com.rental.demo.repository.MaintenancemanRepository;
 import com.rental.demo.repository.WorkOrderRepository;
 import com.rental.demo.service.RepairmanService.MaintenancemanService;
 import com.rental.demo.service.WorkOrderService;
@@ -17,6 +18,8 @@ public class WorkOrderServicelmpl implements WorkOrderService {
     private WorkOrderRepository workOrderRepository;
     @Autowired
     private MaintenancemanService maintenancemanService;
+    @Autowired
+    private MaintenancemanRepository maintenancemanRepository;
     @Override
     public int addWorkOrder(WorkOrder workOrder) {
         workOrderRepository.save(workOrder);
@@ -32,8 +35,14 @@ public class WorkOrderServicelmpl implements WorkOrderService {
         if(workOrder.getStats() != Constant.WOD_NOT_RES){
             return workOrder.getStats();
         }
+        else if(maintenancemanRepository.existsByUsername(maintenancemanName)==false){
+            return Constant.MTM_NOT_EXIST;
+        }
         else{
             workOrder.setMaintenanceName(maintenancemanName);
+            workOrder.setStats(Constant.WOD_ING_RES);
+            workOrderRepository.deleteById(WOId);
+            workOrderRepository.save(workOrder);
             return Constant.SUCCESS;
         }
     }
@@ -45,6 +54,8 @@ public class WorkOrderServicelmpl implements WorkOrderService {
         }
         WorkOrder workOrder = workOrderRepository.findById(WOId).get();
         workOrder.setStats(Constant.WOD_FIS_RES);
+        workOrderRepository.deleteById(WOId);
+        workOrderRepository.save(workOrder);
         return workOrder.getStats();
     }
 
@@ -54,9 +65,13 @@ public class WorkOrderServicelmpl implements WorkOrderService {
             return Constant.ERROR;
         }
         WorkOrder workOrder = workOrderRepository.findById(WOId).get();
-        Maintenanceman maintenanceman = maintenancemanService.findByUsername(workOrder.getMaintenanceName());
-        maintenanceman.setAscore(maintenanceman.getAscore()+score);
-        maintenanceman.setTimes(maintenanceman.getTimes()+1);
+        Maintenanceman maintenanceman = maintenancemanRepository.findByUsername(workOrder.getMaintenanceName());
+        double Ascore = maintenanceman.getAscore();
+        double Times = maintenanceman.getTimes();
+        maintenanceman.setAscore(Ascore+score);
+        maintenanceman.setTimes(Times+1);
+        maintenancemanRepository.deleteById(maintenanceman.getUsername());
+        maintenancemanRepository.save(maintenanceman);
         return Constant.SUCCESS;
     }
 

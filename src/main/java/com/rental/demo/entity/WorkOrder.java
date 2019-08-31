@@ -18,9 +18,9 @@ public class WorkOrder {
     @Id
     private String id;
     private String message;
-    private String TenantName;
+    private String tenantName;
     private int stats;
-    private String MaintenanceName;
+    private String maintenanceName;
     private List<String> imageUrls;
     private int score;
     private LocalDateTime createdTime;

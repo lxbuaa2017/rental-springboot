@@ -46,7 +46,7 @@ public class ShortRentController {
         shortRentOrderRepository.save(shortRentOrder);
     }
 
-    //续租
+    //续租（客服）
     @PostMapping("/setShortRentRelet")
     @ResponseBody
     public void setShortRentRelet(@RequestBody JSONObject jsonObject) {
@@ -59,6 +59,13 @@ public class ShortRentController {
                 DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         shortRentOrder.setLeaveDay(dueTime.plusDays(days).toString());
         shortRentOrder.setState(state);
+        shortRentOrderRepository.save(shortRentOrder);
+    }
+    //续租（客户申请）
+    @PostMapping("/applyShortRentRelet")
+    @ResponseBody
+    public void applyShortRentRelet(@RequestBody ShortRentOrder shortRentOrder) {
+        shortRentOrder.setState(1827);
         shortRentOrderRepository.save(shortRentOrder);
     }
 }

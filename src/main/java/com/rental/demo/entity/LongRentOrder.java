@@ -24,4 +24,5 @@ public class LongRentOrder {
     private Room room;
     private PdfFile pdffile;
     private LocalDateTime createdTime;
+    private int months;
 }

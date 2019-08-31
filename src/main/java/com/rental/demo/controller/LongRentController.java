@@ -133,5 +133,11 @@ public class LongRentController {
         longRentOrder.setState(state);
         longRentOrderRepository.save(longRentOrder);
     }
-
+    //续租（客户申请）
+    @PostMapping("/applyLongRentRelet")
+    @ResponseBody
+    public void applyLongRentRelet(@RequestBody LongRentOrder longRentOrder) {
+        longRentOrder.setState(1827);
+        longRentOrderRepository.save(longRentOrder);
+    }
 }

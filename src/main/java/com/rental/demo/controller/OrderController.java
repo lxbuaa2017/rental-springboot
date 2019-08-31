@@ -35,4 +35,16 @@ public class OrderController {
     public List<Object> getAllOrder(@RequestBody JSONObject jsonObject) {
         return orderService.getAllOrder(jsonObject.getString("username"));
     }
+
+    @RequestMapping(value = "/getUnprocessedOrder", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Object> getUnprocessedOrder() {
+        return orderService.getUnprocessedOrder();
+    }
+
+    @RequestMapping(value = "/getProcessedOrder", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Object> getProcessedOrder() {
+        return orderService.getProcessedOrder();
+    }
 }

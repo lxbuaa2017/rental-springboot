@@ -126,6 +126,27 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Object> getProcessedOrder() {
-        return null;
+        List<Object> list=new ArrayList<>();
+        List<LongRentOrder> longRentOrders=new ArrayList<>();
+        List<LongRentOrder> longRentOrders1=longRentOrderRepository.findAllByState(1824);
+        List<LongRentOrder> longRentOrders2=longRentOrderRepository.findAllByState(1826);
+        longRentOrders.addAll(longRentOrders1);longRentOrders.addAll(longRentOrders2);
+        for(LongRentOrder longRentOrder:longRentOrders){
+            JSONObject jsonObject=new JSONObject();
+            jsonObject.put("type","长租");
+            jsonObject.put("object",longRentOrder);
+            list.add(jsonObject);
+        }
+        List<ShortRentOrder> shortRentOrders=new ArrayList<>();
+        List<ShortRentOrder> shortRentOrders1=shortRentOrderRepository.findAllByState(1824);
+        List<ShortRentOrder> shortRentOrders2=shortRentOrderRepository.findAllByState(1826);
+        shortRentOrders.addAll(shortRentOrders1);shortRentOrders.addAll(shortRentOrders2);
+        for(ShortRentOrder shortRentOrder:shortRentOrders){
+            JSONObject jsonObject=new JSONObject();
+            jsonObject.put("type","短租");
+            jsonObject.put("object",shortRentOrder);
+            list.add(jsonObject);
+        }
+        return list;
     }
 }

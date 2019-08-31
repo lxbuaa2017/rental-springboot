@@ -12,6 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @ToString
 public class Maintenanceman {
     @Id
+    private String id;
     private String username;
     private String password;
     private String phone;
@@ -19,4 +20,6 @@ public class Maintenanceman {
     private int age;
     private boolean isMale;
     private int status;
+    private double Ascore;
+    private double times;
 }

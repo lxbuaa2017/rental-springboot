@@ -15,6 +15,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
+import static com.rental.demo.util.Constant.WOD_NOT_RES;
+
 @RestController
 @RequestMapping("/api")
 public class WorkOrderController {
@@ -28,7 +30,7 @@ public class WorkOrderController {
     public int publish(@RequestBody Map<String,Object> map){
         String jsonString = JSON.toJSONString(map);
         WorkOrder workOrder = JSON.parseObject(jsonString, WorkOrder.class);
-        workOrder.setStats(Constant.WOD_NOT_RES);
+        workOrder.setStats(WOD_NOT_RES);
         workOrder.setCreatedTime(LocalDateTime.now());
         return workOrderService.addWorkOrder(workOrder);
     }
@@ -81,5 +83,11 @@ public class WorkOrderController {
             }
         });
         return list;
+    }
+
+    @RequestMapping(value = "/workorder/getAllOrder",method = RequestMethod.GET)
+    @ResponseBody
+    public List<WorkOrder> getAllOrder(){
+        return workOrderRepository.findAllByStats(WOD_NOT_RES);
     }
 }

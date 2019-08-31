@@ -10,4 +10,5 @@ public interface WorkOrderRepository extends MongoRepository<WorkOrder,String> {
     public List<WorkOrder> findAllByTenantName(String name);
     public List<WorkOrder> findALLByMaintenanceName(String name);
     public List<WorkOrder> findALLByTenantNameAndStats(String name,int stats);
+    public List<WorkOrder> findAllByStats(int stats);
 }

@@ -73,7 +73,7 @@ public class UploadImgServiceImpl implements UploadImgService {
             imgFile.setContentType(file.getContentType());
             imgFile.setSize(file.getSize());
             ImgFile saveImg=imgFileRepository.save(imgFile);
-            String url= "http://114.115.160.38:8081/file/image/"+saveImg.getId();
+            String url= "http://114.115.160.38:8081/api/file/image/"+saveImg.getId();
             return url;
         }
         catch (IOException e){

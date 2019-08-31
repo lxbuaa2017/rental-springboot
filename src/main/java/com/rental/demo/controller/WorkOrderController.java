@@ -1,6 +1,7 @@
 package com.rental.demo.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.rental.demo.entity.Complaints;
 import com.rental.demo.entity.WorkOrder;
 import com.rental.demo.repository.WorkOrderRepository;
@@ -89,5 +90,13 @@ public class WorkOrderController {
     @ResponseBody
     public List<WorkOrder> getAllOrder(){
         return workOrderRepository.findAllByStats(WOD_NOT_RES);
+    }
+
+    @RequestMapping(value = "/workorder/update",method = RequestMethod.POST)
+    @ResponseBody
+    public void getAllOrder(JSONObject jsonObject){
+        String str=JSON.toJSONString(jsonObject);
+        WorkOrder workOrder=(WorkOrder) JSONObject.parse(str);
+        workOrderRepository.save(workOrder);
     }
 }

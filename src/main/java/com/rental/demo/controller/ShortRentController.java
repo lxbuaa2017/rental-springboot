@@ -64,7 +64,10 @@ public class ShortRentController {
     //续租（客户申请）
     @PostMapping("/applyShortRentRelet")
     @ResponseBody
-    public void applyShortRentRelet(@RequestBody ShortRentOrder shortRentOrder) {
+    public void applyShortRentRelet(@RequestBody JSONObject jsonObject) {
+        Map<String, Object> map = (Map<String, Object>) jsonObject.get("shortRentOrder");
+        String jsonString = JSON.toJSONString(map);
+        ShortRentOrder shortRentOrder = JSON.parseObject(jsonString, ShortRentOrder.class);
         shortRentOrder.setState(1827);
         shortRentOrderRepository.save(shortRentOrder);
     }

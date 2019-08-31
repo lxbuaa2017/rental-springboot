@@ -24,35 +24,38 @@ public class LongRentController {
     private RentService rentService;
     @Autowired
     private LongRentOrderRepository longRentOrderRepository;
+
     //@CrossOrigin
-    @RequestMapping(value = "/longRentEnroll",method= RequestMethod.POST)
+    @RequestMapping(value = "/longRentEnroll", method = RequestMethod.POST)
     @ResponseBody
-    public int longRentEnroll(@RequestBody Map<String,Object> map){
+    public int longRentEnroll(@RequestBody Map<String, Object> map) {
 //        String jsonString= JSON.toJSONString(map); Map<String,Object> map
 //        ShortRentOrder shortRentOrder=JSON.parseObject(jsonString,ShortRentOrder.class);
-        int months=Integer.valueOf(map.get("months").toString());
+        int months = Integer.valueOf(map.get("months").toString());
         //LongRentOrder longRentOrder=(LongRentOrder) map.get("longRentOrder");
-        String jsonString= JSON.toJSONString(map.get("longRentOrder"));
-        LongRentOrder longRentOrder=JSON.parseObject(jsonString,LongRentOrder.class);
+        String jsonString = JSON.toJSONString(map.get("longRentOrder"));
+        LongRentOrder longRentOrder = JSON.parseObject(jsonString, LongRentOrder.class);
         System.out.println(longRentOrder);
-        LocalDate checkDate=LocalDate.parse(longRentOrder.getCheckInDay());
-        LocalDate leaveDate=checkDate.plusMonths(months);
+        LocalDate checkDate = LocalDate.parse(longRentOrder.getCheckInDay());
+        LocalDate leaveDate = checkDate.plusMonths(months);
         longRentOrder.setLeaveDay(leaveDate.toString());
         return rentService.longRentalEnroll(longRentOrder);
     }
+
     //对 待审核订单 进行审核
     //通过，则修改为待付款订单（即待签合同）
     @PostMapping("/longRentPass")
     @ResponseBody
-    public void longRentPass(@RequestBody LongRentOrder longRentOrder){
+    public void longRentPass(@RequestBody LongRentOrder longRentOrder) {
         longRentOrder.setState(WAIT_PAY);
         longRentOrderRepository.save(longRentOrder);
     }
+
     //对 待审核订单 进行审核
     //不通过，则直接删除订单
     @PostMapping("/longRentNotPass")
     @ResponseBody
-    public void longRentNotPass(@RequestBody LongRentOrder longRentOrder){
+    public void longRentNotPass(@RequestBody LongRentOrder longRentOrder) {
         longRentOrderRepository.delete(longRentOrder);
     }
 
@@ -60,7 +63,7 @@ public class LongRentController {
     //通过，则修改为在住
     @PostMapping("/longRentPayPass")
     @ResponseBody
-    public void longRentPayPass(@RequestBody LongRentOrder longRentOrder){
+    public void longRentPayPass(@RequestBody LongRentOrder longRentOrder) {
         longRentOrder.setState(INN);
         longRentOrderRepository.save(longRentOrder);
     }
@@ -69,7 +72,7 @@ public class LongRentController {
     //不通过，则修改为待付款
     @PostMapping("/longRentPayNotPass")
     @ResponseBody
-    public void longRentPayNotPass(@RequestBody LongRentOrder longRentOrder){
+    public void longRentPayNotPass(@RequestBody LongRentOrder longRentOrder) {
         longRentOrder.setState(WAIT_PAY);
         longRentOrderRepository.save(longRentOrder);
     }
@@ -78,11 +81,11 @@ public class LongRentController {
     //通过，则修改为在住，延长相应租期
     @PostMapping("/longRentReletPass")
     @ResponseBody
-    public void longRentReletPass(@RequestBody JSONObject jsonObject){
-        LongRentOrder longRentOrder=(LongRentOrder) jsonObject.get("longRentOrder");
-        int months=Integer.valueOf((String)jsonObject.get("months"));
+    public void longRentReletPass(@RequestBody JSONObject jsonObject) {
+        LongRentOrder longRentOrder = (LongRentOrder) jsonObject.get("longRentOrder");
+        int months = Integer.valueOf((String) jsonObject.get("months"));
         longRentOrder.setState(INN);
-        LocalDateTime dueTime=LocalDateTime.parse(longRentOrder.getLeaveDay(),
+        LocalDateTime dueTime = LocalDateTime.parse(longRentOrder.getLeaveDay(),
                 DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         longRentOrder.setLeaveDay(dueTime.plusMonths(months).toString());
         longRentOrderRepository.save(longRentOrder);
@@ -92,7 +95,7 @@ public class LongRentController {
     //不通过，则修改为待付款
     @PostMapping("/longRentReletNotPass")
     @ResponseBody
-    public void longRentReletNotPass(@RequestBody LongRentOrder longRentOrder){
+    public void longRentReletNotPass(@RequestBody LongRentOrder longRentOrder) {
         longRentOrder.setState(WAIT_PAY);
         longRentOrderRepository.save(longRentOrder);
     }
@@ -100,9 +103,11 @@ public class LongRentController {
     //通用接口，前端自己调
     @PostMapping("/setLongRentState")
     @ResponseBody
-    public void setLongRentState(@RequestBody JSONObject jsonObject){
-        LongRentOrder longRentOrder=(LongRentOrder) jsonObject.get("longRentOrder");
-        int state=Integer.valueOf((String)jsonObject.get("state"));
+    public void setLongRentState(@RequestBody JSONObject jsonObject) {
+        Map<String, Object> map = (Map<String, Object>) jsonObject.get("longRentOrder");
+        String jsonString = JSON.toJSONString(map);
+        LongRentOrder longRentOrder = JSON.parseObject(jsonString, LongRentOrder.class);
+        int state = (int) jsonObject.get("state");
         longRentOrder.setState(state);
         longRentOrderRepository.save(longRentOrder);
     }

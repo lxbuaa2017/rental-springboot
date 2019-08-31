@@ -90,4 +90,13 @@ public class WorkOrderController {
     public List<WorkOrder> getAllOrder(){
         return workOrderRepository.findAllByStats(WOD_NOT_RES);
     }
+
+    @RequestMapping(value = "/workorder/update",method = RequestMethod.POST)
+    @ResponseBody
+    public int update(@RequestBody Map<String,Object> map){
+        String jsonString = JSON.toJSONString(map);
+        WorkOrder workOrder = JSON.parseObject(jsonString, WorkOrder.class);
+        workOrder.setCreatedTime(LocalDateTime.now());
+        return workOrderService.addWorkOrder(workOrder);
+    }
 }

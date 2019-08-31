@@ -114,7 +114,24 @@ public class LongRentController {
 
     @GetMapping("/getLongRentOrderById")
     @ResponseBody
-    public LongRentOrder getLongRentOrderById(@RequestParam String id){
+    public LongRentOrder getLongRentOrderById(@RequestParam String id) {
         return longRentOrderRepository.findById(id).get();
     }
+
+    //续租
+    @PostMapping("/setLongRentRelet")
+    @ResponseBody
+    public void setLongRentRelet(@RequestBody JSONObject jsonObject) {
+        Map<String, Object> map = (Map<String, Object>) jsonObject.get("longRentOrder");
+        String jsonString = JSON.toJSONString(map);
+        LongRentOrder longRentOrder = JSON.parseObject(jsonString, LongRentOrder.class);
+        int state = (int) jsonObject.get("state");
+        int months = Integer.parseInt((String) jsonObject.get("months"));
+        LocalDate dueTime = LocalDate.parse(longRentOrder.getLeaveDay(),
+                DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        longRentOrder.setLeaveDay(dueTime.plusMonths(months).toString());
+        longRentOrder.setState(state);
+        longRentOrderRepository.save(longRentOrder);
+    }
+
 }

@@ -94,9 +94,9 @@ public class WorkOrderController {
 
     @RequestMapping(value = "/workorder/update",method = RequestMethod.POST)
     @ResponseBody
-    public void getAllOrder(JSONObject jsonObject){
-        String str=JSON.toJSONString(jsonObject);
-        WorkOrder workOrder=(WorkOrder) JSONObject.parse(str);
+    public void updateOrder(@RequestBody Map<String,Object> map){
+        String str=JSON.toJSONString(map);
+        WorkOrder workOrder=(WorkOrder) JSONObject.parseObject(str,WorkOrder.class);
         workOrderRepository.save(workOrder);
     }
 }

@@ -12,7 +12,6 @@ import java.util.List;
 
 @Data
 @Document(collection = "workorder")
-@AllArgsConstructor
 @ToString
 public class WorkOrder {
     @Id

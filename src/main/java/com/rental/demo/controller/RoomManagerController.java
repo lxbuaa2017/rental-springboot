@@ -1,6 +1,7 @@
 package com.rental.demo.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.rental.demo.entity.LandLord;
 import com.rental.demo.entity.Room;
 import com.rental.demo.repository.RoomRepository;
 import com.rental.demo.service.RoomManagerService;
@@ -25,6 +26,10 @@ public class RoomManagerController {
     @ResponseBody
     public String addRoom(@RequestBody Room room) {
         String address = room.getAddress();
+        LandLord landLord=new LandLord();
+        landLord.setUsername("青年租房网");
+        landLord.setPhone("17611030267");
+        room.setLandLord(landLord);
         if (roomRepository.findByAddress(address) != null)
             return JsonResult.build(ROOM_AREADY_EXIST, "该地址的房源已录入过", null);
         else {
